@@ -1,45 +1,63 @@
 import React from "react";
 import { View, SafeAreaView, ScrollView, Text, StyleSheet } from "react-native";
 import Button from "../components/Button";
+import { ImageBackground } from 'react-native';
 
-const HomeScreen = ({navigation}) => {
-    return (
-        <SafeAreaView>
-            <View>
-                <View>
-                    <ScrollView>
-                        <View>
-                            <Text>Home Screen</Text>
-                            <Button
-                                title="Usuarios"
-                                btnColor="blue"
-                                btnIcon="user"
-                                onPress={() => navigation.navigate('HomeUsuarios')}
-                            />
-                            <Button
-                                title="Zonas"
-                                btnColor="green"
-                                btnIcon="map"
-                                onPress={() => console.log('click')}
-                            />
-                            <Button
-                                title="Insumos"
-                                btnColor="purple"
-                                btnIcon="apple"
-                                onPress={() => console.log('click')}
-                            />
-                        </View>
-                    </ScrollView>
-                </View>
+
+const HomeScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../../assets/Imagenes/Fondo2.jpg')}
+        style={styles.headerBackground}
+      >
+        <SafeAreaView style={styles.safeAreaView}>
+          <ScrollView>
+            <View style={styles.contentContainer}>
+              <Button
+                title="Usuarios"
+                btnColor="#31994d"
+                btnIcon="user"
+                onPress={() => navigation.navigate('HomeUsuarios')}
+              />
+              <Button
+                title="Zonas"
+                btnColor="#31994d"
+                btnIcon="map"
+                onPress={() => console.log('click')}
+              />
+              <Button
+                title="Insumos"
+                btnColor="#31994d"
+                btnIcon="apple"
+                onPress={() => console.log('click')}
+              />
             </View>
+          </ScrollView>
         </SafeAreaView>
-    )
+      </ImageBackground>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {},
-    viewContainer: {},
-
+    container: {
+    flex: 1,
+  },
+  safeAreaView: {
+    flex: 1,
+  },
+  contentContainer: {
+    padding: 15,
+    flex: 1,
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
+
 
 export default HomeScreen;

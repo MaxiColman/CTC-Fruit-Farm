@@ -9,13 +9,11 @@ import UpdateUser from '../screens/Usarios/data/UpdateUser';
 import ViewUser from '../screens/Usarios/data/ViewUser';
 import ViewallUsers from '../screens/Usarios/data/ViewallUsers';
 
+
 const Stack = createStackNavigator();
 
 /* PARA HACER: Importar aca cada una de las pantallas
 ...
-*/
-/*
-Esto es de prueba mia
 */
 const Navigation = () => {
     return (
@@ -25,11 +23,12 @@ const Navigation = () => {
                 <Stack.Screen
                     name="Fruit Farm"
                     component={HomeScreen}
-                    option={{
+                    options={{
                         title: "Fruit Farm",
-                        headerstyle: {
-                            backgroundColor: "#730823"
+                        headerStyle: {
+                            backgroundColor: "#31994d",
                         },
+                        headerTitleAlign: "center",
                         headerTintColor: "#fff",
                         headerTitleStyle: {
                             fontWeight: "bold",
