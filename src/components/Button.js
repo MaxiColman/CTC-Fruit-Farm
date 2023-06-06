@@ -1,43 +1,44 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Button = ({title = 'Button', btnColor = 'red', btnIcon = 'star', onPress = () => console.log('click')}) => {
-    return (
-        <TouchableOpacity style={[styles.button, {backgroundColor: btnColor}]} onPress={onPress}>
-            <View style={styles.container}>
-                <Icon style={styles.icon} name={btnIcon} size={40} color="white" />
-                <Text style={styles.text}>{title}</Text>
-            </View>
-        </TouchableOpacity>
-    )
-}
-
+const Button = ({ title = 'Button', btnColor = 'red', btnIcon = 'star', onPress = () => console.log('click') }) => {
+  return (
+    <TouchableOpacity style={[styles.button, { backgroundColor: btnColor }]} onPress={onPress}>
+      <View style={styles.buttonContainer}>
+        <Icon style={styles.icon} name={btnIcon} size={50} color="white" />
+        <Text style={styles.text}>{title}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    button: {
-        flex: 1,
-        color: 'blue',
-        padding: 10,
-        marginTop: 10,
-        marginLeft: 35,
-        marginRight: 35,
-        borderRadius: 5,
-    },
-    text: {
-        color: 'white',
-    },
-    icon: {
-        paddingBottom: 5,
-        flexDirection: 'row',
-        alignContent: 'center',
-        justifyContent: 'center',
-    },
-})
+  button: {
+    flex: 1,
+    padding: 10,
+    marginTop: 10,
+    marginLeft: 35,
+    marginRight: 25,
+    marginBottom: 2,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    color: 'white',
+  },
+  icon: {
+    paddingBottom: 5,
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 2,
+    padding: 8,
+    marginBottom: 5,
+  },
+});
 
-export default Button
+export default Button;

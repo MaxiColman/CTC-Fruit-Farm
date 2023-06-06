@@ -1,111 +1,126 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
 import MyInputText from '../../../components/MyInputText'
 import SingleButton from '../../../components/SingleButton'
 import DatabaseConecction from '../../../database/db-connection'
-
-
+import { useNavigation } from "@react-navigation/native";
 const db = DatabaseConecction.getConnection();
 
 const AddUser = () => {
 
-  //Seteo de estados
-  const [UserName, SetUserName] = useState("");
-  const [LastName, SetLastName] = useState("");
-  const [UserCi, SetUserCi] = useState("");
+  // estados para los campos del formulario
+  const [userName, setUserName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [cedula, setCedula] = useState("");
 
-  const handleUserName = (UserName) =>{
-    SetUserName(UserName);
+  const navigation = useNavigation();
+
+  // metodo para setear los estados
+  const handleUserName = (userName) => {
+    setUserName(userName);
   }
 
-  const handleLastName = (LastName) =>{
-    SetLastName(LastName);
+  const handleLastName = (lastName) => {
+    setLastName(lastName);
   }
 
-  const handleUserCi = (UserCi) =>{
-    SetUserCi(UserCi);
+  const handleUserCi = (cedula) => {
+    setCedula(cedula);
   }
 
 
-// metodo para guardar el formulario
+  // metodo guarde el formulario
+  const addUser = () => {
+    // llamar a la validacion de datos
+    // si la validacion es correcta
+    // llamar al metodo de guardar
+    console.log("### add user ###");
 
-const Adduser = () => {
-  if(ValidarDatos()){
-   db.transaction((tx) => {
-    tx.executeSql(
-      'INSERT INTO users (UserName, LastName, Ci) VALUES (?, ?, ?)',
-      [UserName,LastName,Ci],
-      (tx, results) =>{
-        if(results.rowsAffected > 0){
-          Alert.alert("Exito, Usuario Agregado");
-          ClearData();
-        }else{
-          Alert.alert("Error, no se pudo guardar el usuario");
-        }
-      }
-    )
-   }
-   )
+    if (validateData()) {
+      console.log("### save user ###");
+      // llamar a la db y guarar los datos
+      db.transaction((tx) => {
+        tx.executeSql(
+          'INSERT INTO users (userName, lastName, cedula) VALUES (?, ?, ?)',
+          [userName, lastName, cedula],
+          (tx, results) => {
+            if (results.rowsAffected > 0) {
+              Alert.alert("Exito", "Usuario registrado correctamente", [
+                {
+                  text: "Ok",
+                  onPress: () => navigation.navigate("HomeScreen"),
+                }
+              ],
+                {
+                  cancelable: false
+                });
+              clearData();
+            } else {
+              Alert.alert("Error", "Error al registrar el usuario");
+            }
+          }
+        )
+      });
+    }
   }
-}
 
-//Validacion de datos
+  // metodo validar datos
+  const validateData = () => {
+    if (userName === "" && !userName.trim()) {
+      Alert.alert("Error", "El nombre de usuario es un campo obligatorio");
+      return false;
+    }
 
-const ValidarDatos = () =>{
-  if(UserName === ""){
-    Alert.alert("Error, El nombre es obligatorio rellene el campo");
-    return false;
+    if (lastName === "" && !lastName.trim()) {
+      Alert.alert("Error", "El apellido es un campo obligatoria");
+      return false;
+    }
+
+    if (cedula === "" && !cedula.trim()) {
+      Alert.alert("Error", "La cedula es un campo obligatorio");
+      return false;
+    }
+
+    return true;
   }
-  if(LastName === ""){
-    Alert.alert("Error, El apellido es obligatorio rellene el campo");
-    return false;
+
+  //  clear de los datos
+  const clearData = () => {
+    setUserName("");
+    setLastName("");
+    setCedula("");
   }
-  if(UserCi === ""){
-    Alert.alert("Error, La cedula es obligatoria rellene el campo");
-    return false;
-  }
-  return true;
-}
-
-// Limpiar datos
-
-const ClearData = () =>{
-  SetUserName("");
-  SetLastName("");
-  SetUserCi("");
-}
-
   return (
     <SafeAreaView>
       <View>
         <View>
           <ScrollView>
-          <KeyboardAvoidingView>
-          <MyInputText
-          styles={styles.inputNom}
-          placeholder = "Nombre"
-          OnChangeText = {handleUserName}
-          value={UserName} 
-          />
-          <MyInputText
-          styles={styles.inputApell}
-          placeholder = "Apellido"
-          OnChangeText = {handleLastName}
-          value={LastName} 
-          />
-          <MyInputText
-          styles={styles.inputCi}
-          placeholder = "Cedula"
-          OnChangeText = {handleUserCi}
-          keyboardType = "numeric"
-          value={UserCi}
-          />
-          <SingleButton 
-          title='Registrar Usuario'
-          btnColor= "green"
-          customPress = {console.log("click")}          
-          />
-          </KeyboardAvoidingView>
+            <KeyboardAvoidingView>
+              <MyInputText
+                style={styles.inputNom}
+                placeholder="Nombre"
+                onChangeText={handleUserName}
+                value={userName}
+              />
+              <MyInputText
+                style={styles.inputApell}
+                placeholder="Apellido"
+                onChangeText={handleLastName}
+                value={lastName}
+              />
+              <MyInputText
+                style={styles.inputCi}
+                placeholder="Cedula"
+                onChangeText={handleUserCi}
+                keyboardType="numeric"
+                value={cedula}
+              />
+              <SingleButton
+                title='Registrar Usuario'
+                btnColor="green"
+                onPress={addUser}
+              />
+            </KeyboardAvoidingView>
           </ScrollView>
         </View>
       </View>

@@ -8,21 +8,32 @@ const db = DatabaseConecction.getConnection();
 
 const HomeScreen = ({ navigation }) => {
 
-useEffect(() =>{
-db.transaction((tx) => {
-    tx.executeSql(
-      "SELECT name FROM sqlite_master WHERE type='table' AND name='users'", [],
-      (tx, results) =>{
-        if(results.rows.length == 0){
-            tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT, UserName VARCHAR(50), LastName VARCHAR(50), Ci NUMERIC(8))',
-                []
-            )
+  const dropDb = (tx) => {
+    tx.executeSql('DROP TABLE IF EXISTS users', []);
+  }
+
+  const createDb = (txn) => {
+    txn.executeSql(
+      'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(60), lastName VARCHAR(20), cedula NUMERIC(8))',
+      []
+    );
+  }
+
+  useEffect(() => {
+    db.transaction((txn) => {
+      txn.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='users'", [],
+        (_, results) => {
+          if(results.rows.length == 0){
+            dropDb(txn);
+            createDb(txn);
+          } else {
+            console.log("Table already exists");
+          }
         }
-      }
-    )
-});
-}, []);
+      )
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -49,6 +60,18 @@ db.transaction((tx) => {
                 title="Insumos"
                 btnColor="#31994d"
                 btnIcon="apple"
+                onPress={() => console.log('click')}
+              />
+               <Button
+                title="Observaciones"
+                btnColor="#31994d"
+                btnIcon="compass"
+                onPress={() => console.log('click')}
+              />
+               <Button
+                title="Tratamientos"
+                btnColor="#31994d"
+                btnIcon="street-view"
                 onPress={() => console.log('click')}
               />
             </View>
