@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 ...
 */
 /*
-Essto es de prueba
+Esto es de prueba mia
 */
 const Navigation = () => {
     return (
