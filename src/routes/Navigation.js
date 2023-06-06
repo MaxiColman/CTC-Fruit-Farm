@@ -35,12 +35,96 @@ const Navigation = () => {
                         },
                     }}
                 />
-                <Stack.Screen name="HomeUsuarios" component={HomeUsuarios} />
-                <Stack.Screen name="AddUser" component={AddUser} />
-                <Stack.Screen name="DeleteUser" component={DeleteUser} />
-                <Stack.Screen name="UpdateUser" component={UpdateUser} />
-                <Stack.Screen name="ViewUser" component={ViewUser} />
-                <Stack.Screen name="ViewallUsers" component={ViewallUsers} />
+                <Stack.Screen 
+                name="HomeUsuarios" 
+                component={HomeUsuarios} 
+                options={{
+                    title: "USUARIOS",
+                    headerStyle: {
+                        backgroundColor: "#31994d",
+                    },
+                    headerTitleAlign: "center",
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                }}
+                />
+                <Stack.Screen 
+                name="AddUser" 
+                component={AddUser} 
+                options={{
+                    title: "Agregar Usuarios",
+                    headerStyle: {
+                        backgroundColor: "#31994d",
+                    },
+                    headerTitleAlign: "center",
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                }}
+                />
+                <Stack.Screen 
+                name="DeleteUser" 
+                component={DeleteUser} 
+                options={{
+                    title: "Borrar Usuarios",
+                    headerStyle: {
+                        backgroundColor: "#31994d",
+                    },
+                    headerTitleAlign: "center",
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                }}
+                />
+                <Stack.Screen 
+                name="UpdateUser" 
+                component={UpdateUser} 
+                options={{
+                    title: "Modificar Usuarios",
+                    headerStyle: {
+                        backgroundColor: "#31994d",
+                    },
+                    headerTitleAlign: "center",
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                }}
+                />
+                <Stack.Screen 
+                name="ViewUser" 
+                component={ViewUser} 
+                options={{
+                    title: "Ver Usuario",
+                    headerStyle: {
+                        backgroundColor: "#31994d",
+                    },
+                    headerTitleAlign: "center",
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                }}
+                />
+                <Stack.Screen 
+                name="ViewallUsers" 
+                component={ViewallUsers} 
+                options={{
+                    title: "Todos los Usuarios",
+                    headerStyle: {
+                        backgroundColor: "#31994d",
+                    },
+                    headerTitleAlign: "center",
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )
