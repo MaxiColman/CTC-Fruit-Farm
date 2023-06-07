@@ -6,7 +6,7 @@ const Button = ({ title = 'Button', btnColor = 'red', btnIcon = 'star', onPress 
   return (
     <TouchableOpacity style={[styles.button, { backgroundColor: btnColor }]} onPress={onPress}>
       <View style={styles.buttonContainer}>
-        <Icon style={styles.icon} name={btnIcon} size={50} color="white" />
+        <Icon style={styles.icon} name={btnIcon} size={40} color="white" />
         <Text style={styles.text}>{title}</Text>
       </View>
     </TouchableOpacity>
@@ -16,17 +16,17 @@ const Button = ({ title = 'Button', btnColor = 'red', btnIcon = 'star', onPress 
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    padding: 10,
+    padding: 5,
     marginTop: 10,
     marginLeft: 35,
-    marginRight: 25,
+    marginRight: 35,
     marginBottom: 2,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     color: 'white',
   },
   icon: {

@@ -6,7 +6,7 @@ const ButtonHomeUsuario = ({ title = 'Button', btnColor = 'red', btnIcon = 'star
   return (
     <TouchableOpacity style={[styles.button, { backgroundColor: btnColor }]} onPress={onPress}>
       <View style={styles.buttonContainer}>
-        <Icon style={styles.icon} name={btnIcon} size={50} color="green" />
+        <Icon style={styles.icon} name={btnIcon} size={50} color="white" />
         <Text style={styles.text}>{title}</Text>
       </View>
     </TouchableOpacity>
