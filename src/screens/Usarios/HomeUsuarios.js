@@ -1,6 +1,6 @@
 import React from "react";
 import { View, SafeAreaView, ScrollView, Text, StyleSheet } from "react-native";
-import Button from "../../components/Button";
+import ButtonHomeUsuario from "../../components/ButtonHomeUsuario";
 import {ImageBackground} from "react-native";
 
 const HomeUsuarios = ({ navigation }) => {
@@ -15,31 +15,31 @@ const HomeUsuarios = ({ navigation }) => {
                         <View>
                             <ScrollView>
                                 <View>
-                                    <Button
+                                    <ButtonHomeUsuario
                                         title="Agregar"
                                         btnColor="#31994d"
                                         btnIcon="user-plus"
                                         onPress={() => navigation.navigate('AddUser')}
                                     />
-                                    <Button
+                                    <ButtonHomeUsuario
                                         title="Borrar"
                                         btnColor="#31994d"
                                         btnIcon="user-times"
                                         onPress={() => navigation.navigate('DeleteUser')}
                                     />
-                                    <Button
+                                    <ButtonHomeUsuario
                                         title="Modificar"
                                         btnColor="#31994d"
                                         btnIcon="user-circle-o"
                                         onPress={() => navigation.navigate('UpdateUser')}
                                     />
-                                    <Button
+                                    <ButtonHomeUsuario
                                         title="Ver usuario"
                                         btnColor="#31994d"
                                         btnIcon="user"
                                         onPress={() => navigation.navigate('ViewUser')}
                                     />
-                                    <Button
+                                    <ButtonHomeUsuario
                                         title="Todos los usuarios"
                                         btnColor="#31994d"
                                         btnIcon="users"
