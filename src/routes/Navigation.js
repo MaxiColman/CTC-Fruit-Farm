@@ -1,14 +1,23 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+
 import HomeScreen from "../screens/HomeScreen";
-import HomeUsuarios from '../screens/Usarios/HomeUsuarios';
-import AddUser from '../screens/Usarios/data/AddUser';
-import DeleteUser from '../screens/Usarios/data/DeleteUser';
-import UpdateUser from '../screens/Usarios/data/UpdateUser';
-import ViewUser from '../screens/Usarios/data/ViewUser';
-import ViewallUsers from '../screens/Usarios/data/ViewallUsers';
+import HomeUsuarios from '../screens/Usuarios/HomeUsuarios';
+import AddUser from '../screens/Usuarios/data/AddUser';
+import DeleteUser from '../screens/Usuarios/data/DeleteUser';
+import UpdateUser from '../screens/Usuarios/data/UpdateUser';
+import ViewUser from '../screens/Usuarios/data/ViewUser';
+import ViewallUsers from '../screens/Usuarios/data/ViewallUsers';
+
 import { Image, View, Text } from 'react-native';
+
+import HomeZonas from '../screens/Zonas/HomeZonas';
+import AddZonas from '../screens/Zonas/data/AddZonas';
+import DeleteZonas from '../screens/Zonas/data/DeleteZonas';
+import UpdateZonas from '../screens/Zonas/data/UpdateZonas';
+import ViewZona from '../screens/Zonas/data/ViemZona';
+import ViewAllZonas from '../screens/Zonas/data/ViewAllZonas';
 
 
 
@@ -125,6 +134,96 @@ const Navigation = () => {
                     component={ViewallUsers}
                     options={{
                         title: "Todos los Usuarios",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="HomeZonas"
+                    component={HomeZonas}
+                    options={{
+                        title: "ZONAS",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="AddZonas"
+                    component={AddZonas}
+                    options={{
+                        title: "Agregar Zonas",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="DeleteZonas"
+                    component={DeleteZonas}
+                    options={{
+                        title: "Borrar Zonas",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="UpdateZonas"
+                    component={UpdateZonas}
+                    options={{
+                        title: "Modificar Zonas",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="ViewZona"
+                    component={ViewZona}
+                    options={{
+                        title: "Ver Zona",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="ViewAllZonas"
+                    component={ViewAllZonas}
+                    options={{
+                        title: "Todos las Zonas",
                         headerStyle: {
                             backgroundColor: "#31994d",
                         },

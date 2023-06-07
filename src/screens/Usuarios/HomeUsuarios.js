@@ -18,7 +18,7 @@ const HomeUsuarios = ({ navigation }) => {
                                     <ButtonHomeUsuario
                                         title="Agregar"
                                         btnColor="#31994d"
-                                        btnIcon="user-plus"
+                                        btnIcon="user"
                                         onPress={() => navigation.navigate('AddUser')}
                                     />
                                     <ButtonHomeUsuario
