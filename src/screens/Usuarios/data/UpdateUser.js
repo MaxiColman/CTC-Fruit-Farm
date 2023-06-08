@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert,} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert, } from "react-native";
 import MyText from "../../../components/MyText";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
@@ -92,7 +92,7 @@ const UpdateUser = () => {
   };
 
   const searchUser = () => {
-    if(!userNameSearch.trim() && userNameSearch === ""){
+    if (!userNameSearch.trim() && userNameSearch === "") {
       Alert.alert("Error", "El nombre de usuario es requerido");
       return;
     }
@@ -101,12 +101,12 @@ const UpdateUser = () => {
         "SELECT * FROM users WHERE userName = ?",
         [userNameSearch],
         (_, results) => {
-          if(results.rows.length > 0) {
+          if (results.rows.length > 0) {
             const user = results.rows.item(0);
             setUserName(user.userName);
             setLastName(user.lastName);
             setCedula(user.cedula);
-          }else {
+          } else {
             Alert.alert("Error", "Usuario no encontrado");
             clearUsernameSearch();
           }
@@ -122,40 +122,40 @@ const UpdateUser = () => {
         <View style={styles.generalView}>
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyboardView}>
-              <MyText textValue="Buscar usuario" textStyle={styles.textStyle} />
+              <MyText textValue="Buscar usuario:" textStyle={styles.title} />
               <MyInputText
                 placeholder="Ingrese el nombre de usuario"
                 onChangeText={handleUserNameSearch}
                 styles={styles.input}
                 value={userNameSearch}
               />
-              <SingleButton 
-                title="Buscar" 
-                onPress={searchUser} 
+              <SingleButton
+                title="Buscar"
+                onPress={searchUser}
                 btnColor='green'
               />
-
-            <MyInputText 
-              placeholder="Nombre de usuario"
-              value={userName}
-              onChangeText={handleUserName}
+              <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
+              <MyInputText
+                placeholder="Nombre de usuario"
+                value={userName}
+                onChangeText={handleUserName}
               />
 
-            <MyInputText 
-              placeholder="Apellido del usuario"
-              value={lastName}
-              onChangeText={handleUserLastName}
-            />
+              <MyInputText
+                placeholder="Apellido del usuario"
+                value={lastName}
+                onChangeText={handleUserLastName}
+              />
 
-            <MyInputText 
-              placeholder="Cedula del usuario"
-              value={cedula}
-              onChangeText={handleCedula}
-            />
+              <MyInputText
+                placeholder="Cedula del usuario"
+                value={cedula}
+                onChangeText={handleCedula}
+              />
 
-            <SingleButton 
-              title="Editar" onPress={() => editUser()} 
-              btnColor="green"
+              <SingleButton
+                title="Editar" onPress={() => editUser()}
+                btnColor="green"
               />
 
             </KeyboardAvoidingView>
@@ -172,13 +172,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    marginTop: 15,
+  },
   viewContainer: {
     flex: 1,
     backgroundColor: "white",
   },
   generalView: {
     flex: 1,
-  }, 
+  },
   textStyle: {
     padding: 10,
     marginLeft: 20,

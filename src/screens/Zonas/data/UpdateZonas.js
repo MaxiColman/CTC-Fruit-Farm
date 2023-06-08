@@ -43,7 +43,6 @@ const navigation = useNavigation();
     setLongitud(longitud);
   }
 
-}
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
@@ -54,7 +53,7 @@ const navigation = useNavigation();
               <MyInputText
                 placeholder="Ingrese el nombre de lugar"
                 onChangeText={handleLugarSearch}
-                styles={styles.input}
+                style={styles.input}
                 value={lugarSearch}
               />
               <SingleButton 
@@ -92,6 +91,8 @@ const navigation = useNavigation();
       </View>
     </SafeAreaView>
   );
+}
+ 
 
   const styles = StyleSheet.create({
     container: {

@@ -60,7 +60,7 @@ const DeleteUser = () => {
       <View style={styles.content}>
         <View style={styles.generalView}>
           <ScrollView>
-            <MyText textValue="Formulario para eliminar usuarios" textStyle={styles.title}/>
+            <MyText textValue="Formulario para eliminar usuarios:" textStyle={styles.title}/>
             <KeyboardAvoidingView>
               <MyInputText
                 style={styles.input}
