@@ -86,6 +86,7 @@ const navigation = useNavigation();
     </SafeAreaView>
   );
 }
+ 
 
   const styles = StyleSheet.create({
     container: {

@@ -3,7 +3,7 @@ import { View, SafeAreaView, ScrollView, Text, StyleSheet } from "react-native";
 import ButtonHomeUsuario from "../../components/ButtonHomeUsuario";
 import {ImageBackground} from "react-native";
 
-const HomeUsuarios = ({ navigation }) => {
+const HomeInsumos = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -16,34 +16,34 @@ const HomeUsuarios = ({ navigation }) => {
                             <ScrollView>
                                 <View>
                                     <ButtonHomeUsuario
-                                        title="Agregar"
+                                        title="Agregar Insumo"
                                         btnColor="#31994d"
-                                        btnIcon="user-plus"
-                                        onPress={() => navigation.navigate('AddUser')}
+                                        btnIcon="cart-plus"
+                                        onPress={() => navigation.navigate('AddInsumo')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Borrar"
+                                        title="Borrar Insumo"
                                         btnColor="#31994d"
-                                        btnIcon="user-times"
-                                        onPress={() => navigation.navigate('DeleteUser')}
+                                        btnIcon="times-circle-o"
+                                        onPress={() => navigation.navigate('DeleteInsumo')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Modificar"
+                                        title="Modificar Insumo"
                                         btnColor="#31994d"
-                                        btnIcon="user-circle"
-                                        onPress={() => navigation.navigate('UpdateUser')}
+                                        btnIcon="edit"
+                                        onPress={() => navigation.navigate('UpdateInsumo')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Ver usuario"
+                                        title="Ver insumo"
                                         btnColor="#31994d"
-                                        btnIcon="id-card-o"
-                                        onPress={() => navigation.navigate('ViewUser')}
+                                        btnIcon="shopping-cart"
+                                        onPress={() => navigation.navigate('ViewInsumo')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Todos los usuarios"
+                                        title="Todos los insumos"
                                         btnColor="#31994d"
-                                        btnIcon="users"
-                                        onPress={() => navigation.navigate('ViewallUsers')}
+                                        btnIcon="list-ol"
+                                        onPress={() => navigation.navigate('ViewallInsumos')}
                                     />
                                 </View>
                             </ScrollView>
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeUsuarios;
+export default HomeInsumos;

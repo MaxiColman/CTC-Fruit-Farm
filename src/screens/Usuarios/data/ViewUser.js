@@ -60,6 +60,7 @@ const ViewUser = () => {
           <ScrollView>
             <KeyboardAvoidingView>
               <MyText text="Filtrar usuario" style={styles.text}/>
+              <MyText textValue="Formulario para buscar usuarios:" textStyle={styles.title}/>
               <MyInputText
                 placeholder="Nombre de usuario"
                 onChangeText={handleUserName}
@@ -97,6 +98,12 @@ const ViewUser = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
   },
   viewContainer: {
     flex: 1,

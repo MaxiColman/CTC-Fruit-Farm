@@ -60,7 +60,7 @@ const HomeScreen = ({ navigation }) => {
                 title="Insumos"
                 btnColor="#31994d"
                 btnIcon="apple"
-                onPress={() => console.log('click')}
+                onPress={() => navigation.navigate('HomeInsumos')}
               />
                <Button
                 title="Observaciones"

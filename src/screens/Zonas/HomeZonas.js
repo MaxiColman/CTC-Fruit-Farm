@@ -17,33 +17,33 @@ const HomeZonas = ({ navigation }) => {
                             <ScrollView>
                                 <View>
                                     <ButtonHomeUsuario
-                                        title="Agregar"
+                                        title="Agregar Zona"
                                         btnColor="#31994d"
-                                        btnIcon="map"
+                                        btnIcon="map-pin"
                                         onPress={() => navigation.navigate('AddZonas')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Borrar"
+                                        title="Borrar Zona"
                                         btnColor="#31994d"
-                                        btnIcon="map"
+                                        btnIcon="window-close-o"
                                         onPress={() => navigation.navigate('DeleteZonas')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Modificar"
+                                        title="Modificar Zona"
                                         btnColor="#31994d"
-                                        btnIcon="map"
+                                        btnIcon="edit"
                                         onPress={() => navigation.navigate('UpdateZonas')}
                                     />
                                     <ButtonHomeUsuario
                                         title="Ver zona"
                                         btnColor="#31994d"
-                                        btnIcon="map"
+                                        btnIcon="safari"
                                         onPress={() => navigation.navigate('ViewZona')}
                                     />
                                     <ButtonHomeUsuario
                                         title="Todas las zonas"
                                         btnColor="#31994d"
-                                        btnIcon="map"
+                                        btnIcon="globe"
                                         onPress={() => navigation.navigate('ViewAllZonas')}
                                     />
                                 </View>
