@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Alert } from 'react-native'
 import MyInputText from '../../../components/MyInputText'
 import MyText from '../../../components/MyText'
 import SingleButton from '../../../components/SingleButton'
 import DatabaseConecction from '../../../database/db-connection'
-import {ImageBackground} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 const db = DatabaseConecction.getConnection();
 
@@ -88,14 +87,9 @@ const AddUser = () => {
     setCedula("");
   }
   return (
-    <View style={styles.container}>
-    <ImageBackground
-      source={require('../../../../assets/Imagenes/FondoFormularios.jpg')}
-      style={styles.headerBackground}
-    >
+
       <SafeAreaView>
         <ScrollView>
-          <KeyboardAvoidingView  style={styles.formContainer}>
             <MyText textValue="Formulario de ingreso de usuarios:" textStyle={styles.title} />
             <MyInputText
               style={styles.input}
@@ -121,21 +115,14 @@ const AddUser = () => {
               btnColor="green"
               onPress={addUser}
             />
-          </KeyboardAvoidingView>
         </ScrollView>
       </SafeAreaView>
-    </ImageBackground>
-  </View>
 );
 };
 
 const styles = StyleSheet.create({
 container: {
   flex: 1,
-},
-headerBackground: {
-  flex: 1,
-  resizeMode: 'stretch',
 },
 formContainer: {
   flex: 1,
