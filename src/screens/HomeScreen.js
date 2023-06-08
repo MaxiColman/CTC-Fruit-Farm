@@ -2,38 +2,9 @@ import React, {useEffect} from "react";
 import { View, SafeAreaView, ScrollView, Text, StyleSheet } from "react-native";
 import Button from "../components/Button";
 import { ImageBackground } from 'react-native';
-import DatabaseConecction from "../database/db-connection";
 
-const db = DatabaseConecction.getConnection();
 
 const HomeScreen = ({ navigation }) => {
-
-  const dropDb = (tx) => {
-    tx.executeSql('DROP TABLE IF EXISTS users', []);
-  }
-
-  const createDb = (txn) => {
-    txn.executeSql(
-      'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(60), lastName VARCHAR(20), cedula VARCHAR(20))',
-      []
-    );
-  }
-
-  useEffect(() => {
-    db.transaction((txn) => {
-      txn.executeSql(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name='users'", [],
-        (_, results) => {
-          if(results.rows.length == 0){
-            dropDb(txn);
-            createDb(txn);
-          } else {
-            console.log("Tabla ya existe");
-          }
-        }
-      )
-    });
-  }, []);
 
   return (
     <View style={styles.container}>
