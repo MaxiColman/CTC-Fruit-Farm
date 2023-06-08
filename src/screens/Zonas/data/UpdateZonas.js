@@ -10,7 +10,6 @@ const db = DatabaseConnection.getConnection();
 
 const UpdateZonas = () => {
 
-const [lugarSearch, setLugarSearch] = useState("");
 const [lugar, setLugar] = useState("");
 const [departamento, setDepartamento] = useState("");
 const [cantTrabajo, setCantTrabajo] = useState("");
@@ -20,10 +19,6 @@ const [longitud, setLongitud] = useState("");
 const navigation = useNavigation();
 
   // metodo para setear los estados
-  const handleLugarSearch = (lugarSearch) => {
-    setLugarSearch(lugarSearch);
-  };
-
   const handleLugar = (lugar) => {
     setLugar(lugar);
   }
@@ -43,46 +38,44 @@ const navigation = useNavigation();
     setLongitud(longitud);
   }
 
-}
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
         <View style={styles.generalView}>
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyboardView}>
-              <MyText textValue="Buscar lugar" textStyle={styles.textStyle} />
-              <MyInputText
-                placeholder="Ingrese el nombre de lugar"
-                onChangeText={handleLugarSearch}
-                styles={styles.input}
-                value={lugarSearch}
-              />
-              <SingleButton 
-                title="Buscar" 
-                onPress={searchUser} 
-                btnColor='green'
+
+            <MyInputText 
+              placeholder="Nombre de lugar"
+              value={lugar}
+              onChangeText={handleLugar}
               />
 
             <MyInputText 
-              placeholder="Nombre de usuario"
-              value={userName}
-              onChangeText={handleUserName}
-              />
-
-            <MyInputText 
-              placeholder="Apellido del usuario"
-              value={lastName}
-              onChangeText={handleUserLastName}
+              placeholder="Nombre de departamento"
+              value={departamento}
+              onChangeText={handleDepartamento}
             />
 
             <MyInputText 
-              placeholder="Cedula del usuario"
-              value={cedula}
-              onChangeText={handleCedula}
+              placeholder="Cantidad de trabajadores"
+              value={cantTrabajo}
+              onChangeText={handleCantTrabajo}
+            />
+
+             <MyInputText 
+              placeholder="Latitud"
+              value={latitud}
+              onChangeText={handleLatitud}
+            />
+             <MyInputText 
+              placeholder="Longitud"
+              value={longitud}
+              onChangeText={handleLongitud}
             />
 
             <SingleButton 
-              title="Editar" onPress={() => editUser()} 
+              title="Editar Zona" onPress={{}} 
               btnColor="green"
               />
 
@@ -92,6 +85,7 @@ const navigation = useNavigation();
       </View>
     </SafeAreaView>
   );
+}
 
   const styles = StyleSheet.create({
     container: {
