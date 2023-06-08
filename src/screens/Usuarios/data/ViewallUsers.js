@@ -6,7 +6,6 @@ import DatabaseConecction from '../../../database/db-connection'
 const db = DatabaseConecction.getConnection();
 
 
-
 const ViewallUsers = () => {
 
   const [users, setUsers] = useState([]);
@@ -17,8 +16,8 @@ const ViewallUsers = () => {
       tx.executeSql(`SELECT * FROM users`, [], (tx, results) => {
         console.log("results", results);
         if (results.rows.length > 0) {
-          setUsers(Array.from(results.rows));
-        } else {
+          setUsers(results.rows._array);
+        } else{
           Alert.alert(
             "Mensaje",
             "No hay usuarios!!!",
@@ -36,19 +35,18 @@ const ViewallUsers = () => {
   }, []);
 
   const listItemView = (item) => {
-    const { id, userName, lastName, cedula } = item; // Desestructura el objeto item para obtener las propiedades
-  
+    
     return (
-      <View key={id} style={styles.listItemView}>
-        <MyText textValue="Nombre de usuario" textStyle={styles.textStyle} />
-        <MyText textValue={userName} textStyle={styles.textStyle} />
-        <MyText textValue="Apellido de usuario" textStyle={styles.textStyle} />
-        <MyText textValue={lastName} textStyle={styles.textStyle} />
-        <MyText textValue="Cedula del usuario" textStyle={styles.textStyle} />
-        <MyText textValue={cedula} textStyle={styles.textStyle} />
-      </View>
-    );
-  };
+        <View key={item.id} style={styles.listItemView}>
+          <MyText textValue="Nombre de Usuario" textStyle={styles.textStyle} />
+          <MyText textValue={item.userName} textStyle={styles.textStyle} />
+  
+          <MyText textValue="Cedula del pibe" textStyle={styles.textStyle} />
+          <MyText textValue={item.cedula} textStyle={styles.textStyle} />
+        </View>
+      );
+    };
+
   
 
   return (

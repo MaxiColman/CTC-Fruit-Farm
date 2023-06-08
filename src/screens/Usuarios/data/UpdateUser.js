@@ -18,7 +18,6 @@ const UpdateUser = () => {
 
   // metodo para setear los estados
   const handleUserNameSearch = (username) => {
-    console.log("### handleUserNameSearch ###", username);
     setUserNameSearch(username);
   };
 
