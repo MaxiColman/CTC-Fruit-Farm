@@ -16,19 +16,19 @@ const HomeUsuarios = ({ navigation }) => {
                             <ScrollView>
                                 <View>
                                     <ButtonHomeUsuario
-                                        title="Agregar"
+                                        title="Agregar usuario"
                                         btnColor="#31994d"
                                         btnIcon="user-plus"
                                         onPress={() => navigation.navigate('AddUser')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Borrar"
+                                        title="Borrar usuario"
                                         btnColor="#31994d"
                                         btnIcon="user-times"
                                         onPress={() => navigation.navigate('DeleteUser')}
                                     />
                                     <ButtonHomeUsuario
-                                        title="Modificar"
+                                        title="Modificar usuario"
                                         btnColor="#31994d"
                                         btnIcon="user-circle"
                                         onPress={() => navigation.navigate('UpdateUser')}
