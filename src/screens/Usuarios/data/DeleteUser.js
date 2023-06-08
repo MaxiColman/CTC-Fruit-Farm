@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { StyleSheet, Text, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView } from 'react-native'
+import React, { useState } from 'react';
+import { StyleSheet, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import MyText from '../../../components/MyText';
 import MyInputText from '../../../components/MyInputText';
@@ -12,7 +12,7 @@ const DeleteUser = () => {
   const navigation = useNavigation();
 
   const deleteUser = () => {
-    if(!userName && !userName.length && userName === ""){
+    if (!userName || !userName.trim()) {
       Alert.alert("Error", "El nombre de usuario es obligatorio");
       return false;
     }
@@ -21,9 +21,9 @@ const DeleteUser = () => {
       tx.executeSql(
         'DELETE FROM users WHERE userName = ?',
         [userName],
-        (tx, results) => {
+        (_, results) => {
           console.log("Results", results.rowsAffected);
-          if(results.rowsAffected > 0){
+          if (results.rowsAffected > 0) {
             Alert.alert("Exito", "Usuario borrado correctamente", [
               {
                 text: "Ok",
@@ -49,7 +49,6 @@ const DeleteUser = () => {
         }
       );
     });
-
   }
 
   const handleUserName = (username) => {
@@ -58,18 +57,19 @@ const DeleteUser = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.viewContainer}>
+      <View style={styles.content}>
         <View style={styles.generalView}>
           <ScrollView>
-            <MyText textValue="Busqueda de Usuario" textStyle={styles.textStyle}/>
+            <MyText textValue="Formulario para eliminar usuarios" textStyle={styles.title}/>
             <KeyboardAvoidingView>
               <MyInputText
+                style={styles.input}
                 placeholder="Nombre de usuario"
                 onChangeText={handleUserName}
                 value={userName}
-                styles={styles.inputStyle}
               />
               <SingleButton
+                style={styles.button}
                 title="Borrar"
                 btnColor="green"
                 onPress={deleteUser}
@@ -82,27 +82,42 @@ const DeleteUser = () => {
   )
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
   },
-  viewContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
+  content: {
+    width: '100%',
+    marginTop: 20,
   },
-  generalView: {
-    flex: 1,
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
   },
-  inputStyle: {
-    padding: 10,
+  input: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    marginTop: 10,
   },
-  textStyle: {
-    padding: 10,
-    marginLeft: 25,
-    color: 'black',
+  button: {
+    backgroundColor: 'green',
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 })
 
-export default DeleteUser
+export default DeleteUser;
+

@@ -54,7 +54,7 @@ const HomeScreen = ({ navigation }) => {
                 title="Zonas"
                 btnColor="#31994d"
                 btnIcon="map"
-                onPress={() => console.log('click')}
+                onPress={() => navigation.navigate('HomeZonas')}
               />
               <Button
                 title="Insumos"

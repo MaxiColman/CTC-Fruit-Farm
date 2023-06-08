@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
 import MyInputText from '../../../components/MyInputText'
+import MyText from '../../../components/MyText'
 import SingleButton from '../../../components/SingleButton'
 import DatabaseConecction from '../../../database/db-connection'
+import {ImageBackground} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 const db = DatabaseConecction.getConnection();
 
@@ -31,14 +33,9 @@ const AddUser = () => {
 
   const addUser = () => {
     console.log("### add user ###");
-  
     if (validateData()) {
       console.log("### save user ###");
-      
-      // Llama a la función getConnection() en lugar de usar la variable db directamente
-      const database = DatabaseConecction.getConnection();
-  
-      database.transaction((tx) => {
+      db.transaction((tx) => {
         tx.executeSql(
           'INSERT INTO users (userName, lastName, cedula) VALUES (?, ?, ?)',
           [userName, lastName, cedula],
@@ -91,49 +88,75 @@ const AddUser = () => {
     setCedula("");
   }
   return (
-    <SafeAreaView>
-      <View>
-        <View>
-          <ScrollView>
-            <KeyboardAvoidingView>
-              <MyInputText
-                style={styles.inputNom}
-                placeholder="Nombre"
-                onChangeText={handleUserName}
-                value={userName}
-              />
-              <MyInputText
-                style={styles.inputApell}
-                placeholder="Apellido"
-                onChangeText={handleLastName}
-                value={lastName}
-              />
-              <MyInputText
-                style={styles.inputCi}
-                placeholder="Cedula"
-                onChangeText={handleUserCi}
-                keyboardType="numeric"
-                value={cedula}
-              />
-              <SingleButton
-                title='Registrar Usuario'
-                btnColor="green"
-                onPress={addUser}
-              />
-            </KeyboardAvoidingView>
-          </ScrollView>
-        </View>
-      </View>
-    </SafeAreaView>
-  )
-}
-
+    <View style={styles.container}>
+    <ImageBackground
+      source={require('../../../../assets/Imagenes/FondoFormularios.jpg')}
+      style={styles.headerBackground}
+    >
+      <SafeAreaView>
+        <ScrollView>
+          <KeyboardAvoidingView  style={styles.formContainer}>
+            <MyText textValue="Formulario de ingreso de usuarios:" textStyle={styles.title} />
+            <MyInputText
+              style={styles.input}
+              placeholder="Nombre"
+              onChangeText={handleUserName}
+              value={userName}
+            />
+            <MyInputText
+              style={styles.input}
+              placeholder="Apellido"
+              onChangeText={handleLastName}
+              value={lastName}
+            />
+            <MyInputText
+              style={styles.input}
+              placeholder="Cedula"
+              onChangeText={handleUserCi}
+              keyboardType="numeric"
+              value={cedula}
+            />
+            <SingleButton
+              title="Registrar Usuario"
+              btnColor="green"
+              onPress={addUser}
+            />
+          </KeyboardAvoidingView>
+        </ScrollView>
+      </SafeAreaView>
+    </ImageBackground>
+  </View>
+);
+};
 
 const styles = StyleSheet.create({
-  container: {},
-  inputNom: {},
-  inputApell: {},
-  inputCi: {},
-})
+container: {
+  flex: 1,
+},
+headerBackground: {
+  flex: 1,
+  resizeMode: 'stretch',
+},
+formContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  paddingHorizontal: 20,
+},
+title: {
+  fontSize: 20,
+  fontWeight: 'bold',
+  marginBottom: 10,
+  textAlign: 'center',
+  marginTop: 15,
+},
+input: {
+  height: 40,
+  borderWidth: 2,
+  borderColor: 'green',
+  marginBottom: 10,
+  paddingHorizontal: 10,
+  marginTop: 10,
+},
+});
 
 export default AddUser
