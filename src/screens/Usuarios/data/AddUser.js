@@ -29,7 +29,6 @@ const AddUser = () => {
     setCedula(cedula);
   }
 
-
   const addUser = () => {
     console.log("### add user ###");
     if (validateData()) {
