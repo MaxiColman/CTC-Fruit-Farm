@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
             dropDb(txn);
             createDb(txn);
           } else {
-            console.log("Table already exists");
+            console.log("Tabla ya existe");
           }
         }
       )

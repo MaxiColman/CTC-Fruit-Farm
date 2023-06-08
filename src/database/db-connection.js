@@ -3,7 +3,7 @@ const DBNAME = 'database.db';
 
 const DatabaseConecction = {
     getConnection: () => SQLite.openDatabase(DBNAME),
-    closeConnection: () => SQLite.closeDatabase(DBNAME)
+    closeConnection: () => SQLite.closeDatabase(DBNAME),
 
 }
 

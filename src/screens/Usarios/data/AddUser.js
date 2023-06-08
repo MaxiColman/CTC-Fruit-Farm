@@ -29,17 +29,16 @@ const AddUser = () => {
   }
 
 
-  // metodo guarde el formulario
   const addUser = () => {
-    // llamar a la validacion de datos
-    // si la validacion es correcta
-    // llamar al metodo de guardar
     console.log("### add user ###");
-
+  
     if (validateData()) {
       console.log("### save user ###");
-      // llamar a la db y guarar los datos
-      db.transaction((tx) => {
+      
+      // Llama a la función getConnection() en lugar de usar la variable db directamente
+      const database = DatabaseConecction.getConnection();
+  
+      database.transaction((tx) => {
         tx.executeSql(
           'INSERT INTO users (userName, lastName, cedula) VALUES (?, ?, ?)',
           [userName, lastName, cedula],
@@ -48,7 +47,7 @@ const AddUser = () => {
               Alert.alert("Exito", "Usuario registrado correctamente", [
                 {
                   text: "Ok",
-                  onPress: () => navigation.navigate("HomeScreen"),
+                  onPress: () => navigation.navigate("HomeUsuarios"),
                 }
               ],
                 {
@@ -63,6 +62,7 @@ const AddUser = () => {
       });
     }
   }
+  
 
   // metodo validar datos
   const validateData = () => {
