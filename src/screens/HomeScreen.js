@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
 
   const createDb = (txn) => {
     txn.executeSql(
-      'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(60), lastName VARCHAR(20), cedula NUMERIC(8))',
+      'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(60), lastName VARCHAR(20), cedula VARCHAR(20))',
       []
     );
   }
@@ -54,7 +54,7 @@ const HomeScreen = ({ navigation }) => {
                 title="Zonas"
                 btnColor="#31994d"
                 btnIcon="map"
-                onPress={() => navigation.navigate('HomeZonas')}
+                onPress={() => console.log('click')}
               />
               <Button
                 title="Insumos"
