@@ -36,17 +36,20 @@ const ViewallUsers = () => {
   }, []);
 
   const listItemView = (item) => {
+    const { id, userName, lastName, cedula } = item; // Desestructura el objeto item para obtener las propiedades
+  
     return (
-      <View key={item.id} style={styles.listItemView}>
+      <View key={id} style={styles.listItemView}>
         <MyText textValue="Nombre de usuario" textStyle={styles.textStyle} />
-        <MyText textValue={item.userName} textStyle={styles.textStyle} />
+        <MyText textValue={userName} textStyle={styles.textStyle} />
         <MyText textValue="Apellido de usuario" textStyle={styles.textStyle} />
-        <MyText textValue={item.lastName} textStyle={styles.textStyle} />
+        <MyText textValue={lastName} textStyle={styles.textStyle} />
         <MyText textValue="Cedula del usuario" textStyle={styles.textStyle} />
-        <MyText textValue={item.cedula} textStyle={styles.textStyle} />
+        <MyText textValue={cedula} textStyle={styles.textStyle} />
       </View>
-    )
-  }
+    );
+  };
+  
 
   return (
     <SafeAreaView style={styles.container}>
