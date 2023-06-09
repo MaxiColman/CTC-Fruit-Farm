@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, SafeAreaView, FlatList, Alert } from 'react-native'
 import MyText from '../../../components/MyText'
+import { ImageBackground } from "react-native";
 import { useNavigation } from '@react-navigation/native'
 import DatabaseConecction from '../../../database/db-connection'
 const db = DatabaseConecction.getConnection();
@@ -17,7 +18,7 @@ const ViewallUsers = () => {
         console.log("results", results);
         if (results.rows.length > 0) {
           setUsers(results.rows._array);
-        } else{
+        } else {
           Alert.alert(
             "Mensaje",
             "No hay usuarios!!!",
@@ -35,53 +36,84 @@ const ViewallUsers = () => {
   }, []);
 
   const listItemView = (item) => {
-    
+    console.log("### algo ###", item);
+
     return (
-        <View key={item.id} style={styles.listItemView}>
-          <MyText textValue="Nombre de Usuario" textStyle={styles.textStyle} />
+      <View key={item.id} style={styles.listItemView}>
+        <View style={styles.userInfoContainer}>
+          <MyText textValue="Nombre del Usuario:" textStyle={styles.title} />
           <MyText textValue={item.userName} textStyle={styles.textStyle} />
-  
-          <MyText textValue="Cedula del pibe" textStyle={styles.textStyle} />
+        </View>
+        <View style={styles.userInfoContainer}>
+          <MyText textValue="Apellido del Usuario:" textStyle={styles.title} />
+          <MyText textValue={item.lastName} textStyle={styles.textStyle} />
+        </View>
+        <View style={styles.userInfoContainer}>
+          <MyText textValue="Cedula:" textStyle={styles.title} />
           <MyText textValue={item.cedula} textStyle={styles.textStyle} />
         </View>
-      );
-    };
-
-  
+      </View>
+    );
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <View>
-          <FlatList
-            data={users}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => listItemView(item)}
-            contentContainerStyle={{ paddingHorizontal: 15 }}
-          />
-        </View>
-      </View>
-    </SafeAreaView>
-  )
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../../../../assets/Imagenes/FondoFormulario.jpg')}
+        style={styles.headerBackground}
+      >
+        <SafeAreaView style={styles.container}>
+          <View>
+            <FlatList
+              data={users}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => listItemView(item)}
+              contentContainerStyle={styles.flatListContainer}
+            />
+          </View>
+        </SafeAreaView>
+      </ImageBackground>
+    </View>
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   textStyle: {
-    color: 'black',
+    color: 'red',
+    fontSize: 18,
+    fontWeight: 'bold',
     padding: 5,
     alignContent: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   listItemView: {
-    backgroundColor: 'white',
+    backgroundColor: '#C6E2CB',
     margin: 5,
     padding: 10,
     borderRadius: 10,
   },
-})
+  userInfoContainer: {
+    marginBottom: 3,
+  },
+  flatListContainer: {
+    paddingHorizontal: 15,
+  },
+});
+
 
 export default ViewallUsers

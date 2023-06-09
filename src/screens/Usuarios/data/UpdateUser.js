@@ -78,6 +78,7 @@ const UpdateUser = () => {
                   onPress: () => navigation.navigate("HomeUsuarios"),
                 },
                 {
+                  text: "Cancel",
                   cancelable: false,
                 }
               ]);

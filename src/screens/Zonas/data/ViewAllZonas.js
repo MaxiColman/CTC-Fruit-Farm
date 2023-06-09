@@ -7,37 +7,68 @@ const db = DatabaseConecction.getConnection();
 
 const ViewAllZonas = () => {
 
-const [lugar, setLugar] = useState([]);
+const [Zonaid, setZonaid] = useState([]);
 const navigation = useNavigation();
 
+useEffect(() => {
+  db.transaction((tx) => {
+    tx.executeSql(`SELECT * FROM zonas`, [], (tx, results) => {
+      console.log("results", results);
+      if (results.rows.length > 0) {
+        setZonaid(results.rows._array);
+      } else{
+        Alert.alert(
+          "Mensaje",
+          "No hay zonas!!!",
+          [
+            {
+              text: "Ok",
+              onPress: () => navigation.navigate("HomeZonas"),
+            },
+          ],
+          { cancelable: false }
+        );
+      }
+    });
+  });
+}, []);
+
 const listItemView = (item) => {
+    
   return (
-    <View key={item.id} style={styles.listItemView}>
-      <MyText textValue="Nombre de usuario" textStyle={styles.textStyle} />
-      <MyText textValue={item.userName} textStyle={styles.textStyle} />
-      <MyText textValue="Apellido de usuario" textStyle={styles.textStyle} />
-      <MyText textValue={item.lastName} textStyle={styles.textStyle} />
-      <MyText textValue="Cedula del usuario" textStyle={styles.textStyle} />
-      <MyText textValue={item.cedula} textStyle={styles.textStyle} />
-    </View>
-  )
-}
+      <View key={item.id} style={styles.listItemView}>
+        <MyText textValue="Nombre del lugar:" textStyle={styles.textStyle} />
+        <MyText textValue={item.lugar} textStyle={styles.textStyle} />
+        <MyText textValue="Nombre del Departamento:" textStyle={styles.textStyle} />
+        <MyText textValue={item.depto} textStyle={styles.textStyle} />
+        <MyText textValue="Cantidad Trabajadores:" textStyle={styles.textStyle} />
+        <MyText textValue={item.cantTrab} textStyle={styles.textStyle} />
+        <MyText textValue="Latitud:" textStyle={styles.textStyle} />
+        <MyText textValue={item.latitud} textStyle={styles.textStyle} />
+        <MyText textValue="Longitud" textStyle={styles.textStyle} />
+        <MyText textValue={item.longitud} textStyle={styles.textStyle} />
+      </View>
+    );
+  };
+
+
 
 return (
-    <SafeAreaView style={styles.container}>
+  <SafeAreaView style={styles.container}>
     <View>
       <View>
         <FlatList
-          data={{}}
-          keyExtractor={({ item }) => listItemView(item)}
-          renderItem={{}}
+          data={Zonaid}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => listItemView(item)}
           contentContainerStyle={{ paddingHorizontal: 15 }}
         />
       </View>
     </View>
   </SafeAreaView>
-  )
+)
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1

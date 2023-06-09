@@ -72,17 +72,17 @@ const ViewUser = () => {
               <View style={styles.presenterView}>
                 {user ? (
                   <>
-                    <MyText textValue="id" textStyle={styles.presenterTextBold}/>
+                    <MyText textValue="ID del Usuario:" textStyle={styles.presenterTextBold}/>
                     <MyText textValue={user.id.toString()} textStyle={styles.presenterText}/>
-                    <MyText textValue="Nombre de usuario" textStyle={styles.presenterTextBold}/>
+                    <MyText textValue="Nombre del Usuario:" textStyle={styles.presenterTextBold}/>
                     <MyText textValue={user.userName} textStyle={styles.presenterText}/>
-                    <MyText textValue="Apellido de usuario" textStyle={styles.presenterTextBold}/>
+                    <MyText textValue="Apellido de usuario:" textStyle={styles.presenterTextBold}/>
                     <MyText textValue={user.lastName} textStyle={styles.presenterText}/>
-                    <MyText textValue="Cedula de usuario" textStyle={styles.presenterTextBold}/>
+                    <MyText textValue="Cedula de usuario:" textStyle={styles.presenterTextBold}/>
                     <MyText textValue={user.cedula} textStyle={styles.presenterText}/>
                   </>
                 ) : (
-                  <Text style={styles.presenterText}>No hay usuario</Text>
+                  <Text style={styles.presenterTextBold}>Ingrese un Usuario</Text>
                 )}
               </View>
             </KeyboardAvoidingView>
@@ -131,16 +131,18 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 10,
     borderRadius: 10,
-    backgroundColor: "#e0e0e0",
+    backgroundColor: '#C6E2CB',
   },
   presenterText: {
     fontSize: 18,
-    color: "black",
+    color: "red",
   },
   presenterTextBold: {
     fontSize: 20,
     fontWeight: "bold",
     color: "black",
+    marginBottom: 10,
+    marginTop: 5,
   }
 });
 

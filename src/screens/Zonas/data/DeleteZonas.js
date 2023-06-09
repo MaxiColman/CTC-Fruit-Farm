@@ -8,11 +8,51 @@ import DatabaseConnection from "../../../database/db-connection";
 const db = DatabaseConnection.getConnection();
 
 const DeleteZonas = () => {
-  const [lugar, setLugar] = useState("");
+  const [ZonaId, setZonaId] = useState("");
   const navigation = useNavigation();
 
-  const handleLugar = (lugar) => {
-    setLugar(lugar);
+  const deleteZona = () => {
+    if (!ZonaId || !ZonaId.trim()) {
+      Alert.alert("Error", "El nombre del lugar es obligatorio");
+      return false;
+    }
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        'DELETE FROM zonas WHERE id = ?',
+        [ZonaId],
+        (_, results) => {
+          console.log("Results", results.rowsAffected);
+          if (results.rowsAffected > 0) {
+            Alert.alert("Exito", "Esta zona fue borrada correctamente", [
+              {
+                text: "Ok",
+                onPress: () => navigation.navigate("HomeZonas"),
+              }
+            ],
+              {
+                cancelable: false
+              }
+            );
+          } else {
+            Alert.alert("Error", "El usuario no existe", [
+              {
+                text: "Ok",
+                onPress: () => navigation.navigate("HomeZonas"),
+              }
+            ],
+              {
+                cancelable: false
+              }
+            )
+          }
+        }
+      );
+    });
+  }
+
+  const handleZonaId = (id) => {
+    setZonaId(id);
   }
 
   return (
@@ -20,19 +60,20 @@ const DeleteZonas = () => {
       <View style={styles.content}>
         <View style={styles.generalView}>
           <ScrollView>
-            <MyText textValue="Formulario para eliminar lugar" textStyle={styles.title}/>
+            <MyText textValue="Formulario para eliminar una zona" textStyle={styles.title} />
             <KeyboardAvoidingView>
               <MyInputText
                 style={styles.input}
-                placeholder="Nombre de lugar"
-                onChangeText={handleLugar}
-                value={lugar}
+                placeholder="ID de la zona que quiere borrar"
+                onChangeText={handleZonaId}
+                keyboardType='numeric'
+                value={ZonaId}
               />
               <SingleButton
                 style={styles.button}
-                title="Borrar"
+                title="Borrar Zona"
                 btnColor="green"
-                onPress={{}}
+                onPress={deleteZona}
               />
             </KeyboardAvoidingView>
           </ScrollView>

@@ -52,8 +52,17 @@ const styles = StyleSheet.create({
     padding: 10
   },
   input: {
-    color: 'black',
-  },
+    height: 20,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    marginTop: 10,
+    fontSize: 15,
+    color: 'black', 
+    paddingLeft: 12,
+    paddingRight: 12, 
+    textAlign: 'left',
+    fontWeight: 'bold', 
+  }  
 });
 
 

@@ -1,10 +1,41 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, SafeAreaView, ScrollView, Text, StyleSheet } from "react-native";
 import ButtonHomeUsuario from "../../components/ButtonHomeUsuario";
 import {ImageBackground} from "react-native";
+import DatabaseConecction from "../../database/db-connection";
+
+const db = DatabaseConecction.getConnection();
 
 
 const HomeZonas = ({ navigation }) => {
+
+    const dropDb = (tx) => {
+        tx.executeSql('DROP TABLE IF EXISTS zonas', []);
+      }
+    
+      const createDb = (txn) => {
+        txn.executeSql(
+          'CREATE TABLE IF NOT EXISTS zonas (id INTEGER PRIMARY KEY AUTOINCREMENT, lugar VARCHAR(60), depto VARCHAR(20), cantTrab VARCHAR(50), latitud VARCHAR(60), longitud VARCHAR(60))',
+          []
+        );
+      }
+    
+      useEffect(() => {
+        db.transaction((txn) => {
+          txn.executeSql(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='zonas'", [],
+            (_, results) => {
+              if(results.rows.length == 0){
+                dropDb(txn);
+                createDb(txn);
+              } else {
+                console.log("Tabla ya existe");
+              }
+            }
+          )
+        });
+      }, []);
+
     return (
         <View style={styles.container}>
             <ImageBackground
