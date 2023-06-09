@@ -5,6 +5,7 @@ import MyText from '../../../components/MyText'
 import SingleButton from '../../../components/SingleButton'
 import DatabaseConecction from '../../../database/db-connection'
 import { useNavigation } from "@react-navigation/native";
+import { ImageBackground } from 'react-native'
 const db = DatabaseConecction.getConnection();
 
 const AddUser = () => {
@@ -20,15 +21,12 @@ const AddUser = () => {
   const handleUserName = (userName) => {
     setUserName(userName);
   }
-
   const handleLastName = (lastName) => {
     setLastName(lastName);
   }
-
   const handleUserCi = (cedula) => {
     setCedula(cedula);
   }
-
   const addUser = () => {
     console.log("### add user ###");
     if (validateData()) {
@@ -57,8 +55,6 @@ const AddUser = () => {
       });
     }
   }
-  
-
   // metodo validar datos
   const validateData = () => {
     if (userName === "" && !userName.trim()) {
@@ -78,7 +74,6 @@ const AddUser = () => {
 
     return true;
   }
-
   //  clear de los datos
   const clearData = () => {
     setUserName("");
@@ -86,9 +81,13 @@ const AddUser = () => {
     setCedula("");
   }
   return (
-
-      <SafeAreaView>
-        <ScrollView>
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../../../../assets/Imagenes/Fondo3.jpg')}
+        style={styles.headerBackground}
+      >
+        <SafeAreaView>
+          <ScrollView>
             <MyText textValue="Formulario de ingreso de usuarios:" textStyle={styles.title} />
             <MyInputText
               style={styles.input}
@@ -114,35 +113,45 @@ const AddUser = () => {
               btnColor="green"
               onPress={addUser}
             />
-        </ScrollView>
-      </SafeAreaView>
-);
+          </ScrollView>
+        </SafeAreaView>
+      </ImageBackground>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-},
-formContainer: {
-  flex: 1,
-  justifyContent: 'center',
-  paddingHorizontal: 20,
-},
-title: {
-  fontSize: 20,
-  fontWeight: 'bold',
-  marginBottom: 10,
-  textAlign: 'center',
-  marginTop: 15,
-},
-input: {
-  height: 40,
-  borderWidth: 2,
-  borderColor: 'green',
-  marginBottom: 10,
-  paddingHorizontal: 10,
-  marginTop: 10,
-},
+  container: {
+    flex: 1,
+  },
+  formContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  input: {
+    width: '85%',
+    alignSelf: 'center',
+    height: 50,
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginBottom: 10,
+    paddingHorizontal: 35,
+    marginTop: 20,
+  },
 });
 
 export default AddUser
