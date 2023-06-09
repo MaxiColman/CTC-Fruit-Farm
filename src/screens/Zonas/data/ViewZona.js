@@ -36,7 +36,7 @@ const getZona = () => {
           console.log('seteo zona')
           setid(results.rows._array[0]);
         } else {
-          Alert.alert("Error", "El la zona no existe", [
+          Alert.alert("Error", "La zona no existe", [
             {
               text: "Ok",
               onPress: () => navigation.navigate("HomeZonas"),

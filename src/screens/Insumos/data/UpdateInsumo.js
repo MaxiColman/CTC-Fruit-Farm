@@ -117,6 +117,7 @@ const UpdateInsumo = () => {
               <MyInputText
                 placeholder="Ingrese el ID del Insumo a buscar"
                 onChangeText={handlesetInsumoId}
+                keyboardType="numeric"
                 styles={styles.input}
                 value={InsumoId}
               />
