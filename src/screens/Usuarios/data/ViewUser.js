@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView,} from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView, } from "react-native";
 import MyText from "../../../components/MyText";
+import { ImageBackground } from "react-native";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
 import { useNavigation } from "@react-navigation/native";
@@ -20,7 +21,7 @@ const ViewUser = () => {
   };
 
   const getUser = () => {
-    if(!userName && !userName.length && userName === ""){
+    if (!userName && !userName.length && userName === "") {
       Alert.alert("Error", "El nombre de usuario es obligatorio");
       return false;
     }
@@ -33,7 +34,7 @@ const ViewUser = () => {
         [userName],
         (tx, results) => {
           console.log("Results", results.rows);
-          if(results.rows.length > 0){
+          if (results.rows.length > 0) {
             console.log('seteo usuario')
             setUser(results.rows._array[0]);
           } else {
@@ -43,9 +44,9 @@ const ViewUser = () => {
                 onPress: () => navigation.navigate("HomeUsuarios"),
               }
             ],
-            {
-              cancelable: false
-            }
+              {
+                cancelable: false
+              }
             )
           }
         }
@@ -54,42 +55,49 @@ const ViewUser = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.viewContainer}>
-        <View style={styles.generalView}>
-          <ScrollView>
-            <KeyboardAvoidingView>
-              <MyText text="Filtrar usuario" style={styles.text}/>
-              <MyText textValue="Formulario para buscar usuarios:" textStyle={styles.title}/>
-              <MyInputText
-                placeholder="Nombre de usuario"
-                onChangeText={handleUserName}
-                style={styles.input}
-                value={userName}
-              />
-              <SingleButton title="Buscar" btnColor="green" onPress={getUser} />
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../../../../assets/Imagenes/FondoFormulario.jpg')}
+        style={styles.headerBackground}
+      >
+        <SafeAreaView style={styles.container}>
+          <View style={styles.viewContainer}>
+            <View style={styles.generalView}>
+              <ScrollView>
+                <KeyboardAvoidingView>
+                  <MyText text="Filtrar usuario" style={styles.text} />
+                  <MyText textValue="Formulario para buscar usuarios:" textStyle={styles.title} />
+                  <MyInputText
+                    placeholder="Nombre de usuario"
+                    onChangeText={handleUserName}
+                    style={styles.input}
+                    value={userName}
+                  />
+                  <SingleButton title="Buscar" btnColor="green" onPress={getUser} />
 
-              <View style={styles.presenterView}>
-                {user ? (
-                  <>
-                    <MyText textValue="ID del Usuario:" textStyle={styles.presenterTextBold}/>
-                    <MyText textValue={user.id.toString()} textStyle={styles.presenterText}/>
-                    <MyText textValue="Nombre del Usuario:" textStyle={styles.presenterTextBold}/>
-                    <MyText textValue={user.userName} textStyle={styles.presenterText}/>
-                    <MyText textValue="Apellido de usuario:" textStyle={styles.presenterTextBold}/>
-                    <MyText textValue={user.lastName} textStyle={styles.presenterText}/>
-                    <MyText textValue="Cedula de usuario:" textStyle={styles.presenterTextBold}/>
-                    <MyText textValue={user.cedula} textStyle={styles.presenterText}/>
-                  </>
-                ) : (
-                  <Text style={styles.presenterTextBold}>Ingrese un Usuario</Text>
-                )}
-              </View>
-            </KeyboardAvoidingView>
-          </ScrollView>
-        </View>
-      </View>
-    </SafeAreaView>
+                  <View style={styles.presenterView}>
+                    {user ? (
+                      <>
+                        <MyText textValue="ID del Usuario:" textStyle={styles.presenterTextBold} />
+                        <MyText textValue={user.id.toString()} textStyle={styles.presenterText} />
+                        <MyText textValue="Nombre del Usuario:" textStyle={styles.presenterTextBold} />
+                        <MyText textValue={user.userName} textStyle={styles.presenterText} />
+                        <MyText textValue="Apellido de usuario:" textStyle={styles.presenterTextBold} />
+                        <MyText textValue={user.lastName} textStyle={styles.presenterText} />
+                        <MyText textValue="Cedula de usuario:" textStyle={styles.presenterTextBold} />
+                        <MyText textValue={user.cedula} textStyle={styles.presenterText} />
+                      </>
+                    ) : (
+                      <Text style={styles.presenterTextBold}>Ingrese un Usuario</Text>
+                    )}
+                  </View>
+                </KeyboardAvoidingView>
+              </ScrollView>
+            </View>
+          </View>
+        </SafeAreaView>
+      </ImageBackground>
+    </View>
   );
 };
 
@@ -107,17 +115,20 @@ const styles = StyleSheet.create({
   },
   viewContainer: {
     flex: 1,
-    backgroundColor: "white",
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   generalView: {
     flex: 1,
   },
-  text:{
+  text: {
     padding: 10,
     marginLeft: 20,
     color: 'black'
   },
-  input:{
+  input: {
     padding: 10,
     margin: 10,
     color: 'black'
