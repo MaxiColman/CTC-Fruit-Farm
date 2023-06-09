@@ -104,6 +104,7 @@ const UpdateZonas = () => {
                   onPress: () => navigation.navigate("HomeZonas"),
                 },
                 {
+                  text: "cancel",
                   cancelable: false,
                 }
               ]);

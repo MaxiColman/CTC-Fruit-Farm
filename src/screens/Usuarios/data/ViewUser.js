@@ -55,11 +55,6 @@ const ViewUser = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../../assets/Imagenes/FondoFormulario.jpg')}
-        style={styles.headerBackground}
-      >
         <SafeAreaView style={styles.container}>
           <View style={styles.viewContainer}>
             <View style={styles.generalView}>
@@ -96,8 +91,6 @@ const ViewUser = () => {
             </View>
           </View>
         </SafeAreaView>
-      </ImageBackground>
-    </View>
   );
 };
 
