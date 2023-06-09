@@ -16,7 +16,7 @@ import HomeZonas from '../screens/Zonas/HomeZonas';
 import AddZonas from '../screens/Zonas/data/AddZonas';
 import DeleteZonas from '../screens/Zonas/data/DeleteZonas';
 import UpdateZonas from '../screens/Zonas/data/UpdateZonas';
-import ViewZona from '../screens/Zonas/data/ViemZona';
+import ViewZona from '../screens/Zonas/data/ViewZona';
 import ViewAllZonas from '../screens/Zonas/data/ViewAllZonas';
 /*---------------------------------------------------------------*/
 /* ZONA DE IMPORT DE COMPONENTES DE INSUMOS*/

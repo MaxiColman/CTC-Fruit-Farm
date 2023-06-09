@@ -5,7 +5,6 @@ import { ImageBackground } from "react-native";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
 import { useNavigation } from "@react-navigation/native";
-
 import DatabaseConnection from "../../../database/db-connection";
 const db = DatabaseConnection.getConnection();
 
