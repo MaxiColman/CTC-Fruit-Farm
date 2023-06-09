@@ -3,12 +3,17 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, Alert } from 'react-n
 import MyInputText from '../../../components/MyInputText'
 import MyText from '../../../components/MyText'
 import SingleButton from '../../../components/SingleButton'
+import DatabaseConecction from '../../../database/db-connection'
+import { useNavigation } from "@react-navigation/native";
+const db = DatabaseConecction.getConnection();
 
 const AddInsumo = () => {
 
   // estados para los campos del formulario
   const [insumoName, setInsumoName] = useState("");
   const [ cantidadLitros, setCantidadLitros] = useState("");
+
+  const navigation = useNavigation();
 
 // metodo para setear los estados
 const handleinsumoName = (insumoName) => {
@@ -19,6 +24,35 @@ const handlecantidadLitros = (cantidadLitros) => {
   setCantidadLitros(cantidadLitros);
 }
 
+const addInsumos = () => {
+  console.log("### add insumos ###");
+  if (validateData()) {
+    console.log("### save insumos ###");
+    db.transaction((tx) => {
+      tx.executeSql(
+        'INSERT INTO insumos (insumoName, cantLitros) VALUES (?, ?)',
+        [insumoName, cantidadLitros],
+        (tx, results) => {
+          if (results.rowsAffected > 0) {
+            Alert.alert("Exito", "Insumo agregado correctamente", [
+              {
+                text: "Ok",
+                onPress: () => navigation.navigate("HomeInsumos"),
+              }
+            ],
+              {
+                text: "Cancel",
+                cancelable: false
+              });
+            clearData();
+          } else {
+            Alert.alert("Error", "Error al registrar el insumo");
+          }
+        }
+      )
+    });
+  }
+}
 
 // metodo validar datos
 const validateData = () => {
@@ -56,12 +90,13 @@ return (
           style={styles.input}
           placeholder="Cantidad de litros"
           onChangeText={handlecantidadLitros}
+          keyboardType="numeric"
           value={cantidadLitros}
         />
         <SingleButton
           title="Registrar Insumo"
           btnColor="green"
-          onPress={() => console.log('click')}
+          onPress={addInsumos}
         />
     </ScrollView>
   </SafeAreaView>

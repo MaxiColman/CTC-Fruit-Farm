@@ -13,7 +13,7 @@ const DeleteZonas = () => {
 
   const deleteZona = () => {
     if (!ZonaId || !ZonaId.trim()) {
-      Alert.alert("Error", "El nombre del lugar es obligatorio");
+      Alert.alert("Error", "El numero de ID de la zona es obligatorio");
       return false;
     }
 
