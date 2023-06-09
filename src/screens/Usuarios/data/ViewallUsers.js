@@ -59,7 +59,7 @@ const ViewallUsers = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../../../assets/Imagenes/FondoFormulario.jpg')}
+        source={require('../../../../assets/Imagenes/Fondo3.jpg')}
         style={styles.headerBackground}
       >
         <SafeAreaView style={styles.container}>
