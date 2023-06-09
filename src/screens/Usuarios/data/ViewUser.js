@@ -54,6 +54,11 @@ const ViewUser = () => {
   };
 
   return (
+    <View style={styles.container}>
+    <ImageBackground
+       source={require('../../../../assets/Imagenes/Fondo3.jpg')}
+       style={styles.headerBackground}
+     >
         <SafeAreaView style={styles.container}>
           <View style={styles.viewContainer}>
             <View style={styles.generalView}>
@@ -90,6 +95,8 @@ const ViewUser = () => {
             </View>
           </View>
         </SafeAreaView>
+        </ImageBackground>
+        </View>
   );
 };
 
@@ -146,7 +153,11 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 10,
     marginTop: 5,
-  }
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
 });
 
 export default ViewUser;

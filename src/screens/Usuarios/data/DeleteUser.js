@@ -5,6 +5,7 @@ import MyText from '../../../components/MyText';
 import MyInputText from '../../../components/MyInputText';
 import SingleButton from '../../../components/SingleButton';
 import DatabaseConnection from "../../../database/db-connection";
+import { ImageBackground } from 'react-native';
 const db = DatabaseConnection.getConnection();
 
 const DeleteUser = () => {
@@ -56,6 +57,11 @@ const DeleteUser = () => {
   }
 
   return (
+    <View style={styles.container}>
+     <ImageBackground
+        source={require('../../../../assets/Imagenes/Fondo3.jpg')}
+        style={styles.headerBackground}
+      >
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.generalView}>
@@ -79,13 +85,14 @@ const DeleteUser = () => {
         </View>
       </View>
     </SafeAreaView>
+    </ImageBackground>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   content: {
     width: '100%',
@@ -116,6 +123,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 })
 

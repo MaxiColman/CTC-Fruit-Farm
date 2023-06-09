@@ -5,6 +5,7 @@ import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
 import { useNavigation } from "@react-navigation/native";
 import DatabaseConnection from "../../../database/db-connection";
+import { ImageBackground } from "react-native";
 
 const db = DatabaseConnection.getConnection();
 
@@ -117,52 +118,58 @@ const UpdateUser = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.viewContainer}>
-        <View style={styles.generalView}>
-          <ScrollView>
-            <KeyboardAvoidingView style={styles.keyboardView}>
-              <MyText textValue="Buscar usuario:" textStyle={styles.title} />
-              <MyInputText
-                placeholder="Ingrese el nombre de usuario"
-                onChangeText={handleUserNameSearch}
-                styles={styles.input}
-                value={userNameSearch}
-              />
-              <SingleButton
-                title="Buscar"
-                onPress={searchUser}
-                btnColor='green'
-              />
-              <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
-              <MyInputText
-                placeholder="Nombre de usuario"
-                value={userName}
-                onChangeText={handleUserName}
-              />
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../../../../assets/Imagenes/Fondo3.jpg')}
+        style={styles.headerBackground}
+      >
+        <SafeAreaView style={styles.container}>
 
-              <MyInputText
-                placeholder="Apellido del usuario"
-                value={lastName}
-                onChangeText={handleUserLastName}
-              />
+          <View style={styles.generalView}>
+            <ScrollView>
+              <KeyboardAvoidingView style={styles.keyboardView}>
+                <MyText textValue="Buscar usuario:" textStyle={styles.title} />
+                <MyInputText
+                  placeholder="Ingrese el nombre de usuario"
+                  onChangeText={handleUserNameSearch}
+                  styles={styles.input}
+                  value={userNameSearch}
+                />
+                <SingleButton
+                  title="Buscar"
+                  onPress={searchUser}
+                  btnColor='green'
+                />
+                <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
+                <MyInputText
+                  placeholder="Nombre de usuario"
+                  value={userName}
+                  onChangeText={handleUserName}
+                />
 
-              <MyInputText
-                placeholder="Cedula del usuario"
-                value={cedula}
-                onChangeText={handleCedula}
-              />
+                <MyInputText
+                  placeholder="Apellido del usuario"
+                  value={lastName}
+                  onChangeText={handleUserLastName}
+                />
 
-              <SingleButton
-                title="Editar" onPress={() => editUser()}
-                btnColor="green"
-              />
+                <MyInputText
+                  placeholder="Cedula del usuario"
+                  value={cedula}
+                  onChangeText={handleCedula}
+                />
 
-            </KeyboardAvoidingView>
-          </ScrollView>
-        </View>
-      </View>
-    </SafeAreaView>
+                <SingleButton
+                  title="Editar" onPress={() => editUser()}
+                  btnColor="green"
+                />
+
+              </KeyboardAvoidingView>
+            </ScrollView>
+          </View>
+        </SafeAreaView>
+      </ImageBackground>
+    </View>
   );
 };
 
@@ -179,10 +186,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 15,
   },
-  viewContainer: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   generalView: {
     flex: 1,
   },
@@ -197,7 +200,11 @@ const styles = StyleSheet.create({
   keyboardView: {
     flex: 1,
     justifyContent: "space-between",
-  }
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
 });
 
 export default UpdateUser;
