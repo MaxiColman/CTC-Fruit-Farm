@@ -30,6 +30,8 @@ const HomeZonas = ({ navigation }) => {
                 createDb(txn);
               } else {
                 console.log("Tabla ya existe");
+                dropDb(txn);
+                createDb(txn);
               }
             }
           )

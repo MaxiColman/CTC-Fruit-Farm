@@ -109,57 +109,60 @@ const AddZonas = () => {
 
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <MyText textValue="Formulario de ingreso de zonas:" textStyle={styles.title} />
-        <View style={styles.input}>
-          <Picker
-            selectedValue={lugar}
-            onValueChange={(itemValue) => setLugar(itemValue)}
-          >
-            <Picker.Item label="Estancia" value="Estancia" />
-            <Picker.Item label="Quinta" value="Quinta" />
-            <Picker.Item label="Plantacion" value="Plantacion" />
-          </Picker>
-        </View>
-        <MyInputText
-          style={styles.input}
-          placeholder="Departamento"
-          onChangeText={handleDepartamento}
-          value={depto}
-        />
-        <MyInputText
-          style={styles.input}
-          placeholder="Cantidad de trabajadores"
-          onChangeText={handleCantTrabajo}
-          keyboardType="numeric"
-          value={cantTrab}
-        />
-        <MyInputText
-          style={styles.input}
-          placeholder="Latitud"
-          onChangeText={handleLatitud}
-          value={latitud}
-        />
-        <MyInputText
-          style={styles.input}
-          placeholder="Longitud"
-          onChangeText={handleLongitud}
-          value={longitud}
-        />
-        <SingleButton
-          title="Registrar Zona"
-          btnColor="green"
-          onPress={addZonas}
-        />
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <SafeAreaView>
+        <ScrollView>
+          <MyText textValue="Formulario de ingreso de zonas:" textStyle={styles.title} />
+          <View style={styles.input}>
+            <Picker
+              selectedValue={lugar}
+              onValueChange={(itemValue) => setLugar(itemValue)}
+            >
+              <Picker.Item label="Estancia" value="Estancia" />
+              <Picker.Item label="Quinta" value="Quinta" />
+              <Picker.Item label="Plantacion" value="Plantacion" />
+            </Picker>
+          </View>
+          <MyInputText
+            style={styles.input}
+            placeholder="Departamento"
+            onChangeText={handleDepartamento}
+            value={depto}
+          />
+          <MyInputText
+            style={styles.input}
+            placeholder="Cantidad de trabajadores"
+            onChangeText={handleCantTrabajo}
+            keyboardType="numeric"
+            value={cantTrab}
+          />
+          <MyInputText
+            style={styles.input}
+            placeholder="Latitud"
+            onChangeText={handleLatitud}
+            value={latitud}
+          />
+          <MyInputText
+            style={styles.input}
+            placeholder="Longitud"
+            onChangeText={handleLongitud}
+            value={longitud}
+          />
+          <SingleButton
+            title="Registrar Zona"
+            btnColor="green"
+            onPress={addZonas}
+          />
+        </ScrollView>
+      </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   formContainer: {
     flex: 1,
@@ -174,7 +177,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   input: {
-    width: '85%',
+    width: '80%',
     alignSelf: 'center',
     height: 50,
     borderWidth: 1,

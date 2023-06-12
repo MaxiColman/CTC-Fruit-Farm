@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView, } from "react-native";
 import MyText from "../../../components/MyText";
-import { ImageBackground } from "react-native";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
+import Icon from 'react-native-vector-icons/Entypo';
 import { useNavigation } from "@react-navigation/native";
 import DatabaseConnection from "../../../database/db-connection";
 const db = DatabaseConnection.getConnection();
@@ -54,26 +54,23 @@ const ViewUser = () => {
   };
 
   return (
-    <View style={styles.container}>
-    <ImageBackground
-       source={require('../../../../assets/Imagenes/Fondo3.jpg')}
-       style={styles.headerBackground}
-     >
         <SafeAreaView style={styles.container}>
           <View style={styles.viewContainer}>
-            <View style={styles.generalView}>
+          <MyText textValue="Formulario para buscar usuarios:" textStyle={styles.title} />
+            <View style={styles.formContainer}>
               <ScrollView>
                 <KeyboardAvoidingView>
-                  <MyText text="Filtrar usuario" style={styles.text} />
-                  <MyText textValue="Formulario para buscar usuarios:" textStyle={styles.title} />
+                <Icon name="user" size={20} color="black" style={styles.icon} />
+                <Text style={styles.title2}>Nombre del Usuario:</Text>
                   <MyInputText
-                    placeholder="Nombre de usuario"
+                    placeholder="Ingrese un nombre"
                     onChangeText={handleUserName}
                     style={styles.input}
                     value={userName}
                   />
                   <SingleButton title="Buscar" btnColor="green" onPress={getUser} />
-
+                  <Icon name="list" size={20} color="black" style={styles.icon1} />
+                  <Text style={styles.title2}>Informacion del Usuario:</Text>
                   <View style={styles.presenterView}>
                     {user ? (
                       <>
@@ -95,8 +92,6 @@ const ViewUser = () => {
             </View>
           </View>
         </SafeAreaView>
-        </ImageBackground>
-        </View>
   );
 };
 
@@ -105,12 +100,51 @@ const ViewUser = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E8EAF6',
+  },
+  formContainer: {
+    marginTop: 15,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    padding: 15,
+    marginBottom: 35,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    flex: 1,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 15,
+  },
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: 72,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 5,
+  },
+  icon: {
+    position: 'absolute',
+    left: 45,
+    top: 6,
+  },
+  icon1: {
+    position: 'absolute',
+    left: 45,
+    top: 202,
   },
   viewContainer: {
     flex: 1,
@@ -140,12 +174,15 @@ const styles = StyleSheet.create({
     alignContent: "center",
     margin: 20,
     padding: 10,
+    borderWidth: 2,
+    borderColor: 'black',
     borderRadius: 10,
     backgroundColor: '#C6E2CB',
   },
   presenterText: {
     fontSize: 18,
     color: "red",
+    fontWeight: "bold",
   },
   presenterTextBold: {
     fontSize: 20,
@@ -153,10 +190,6 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 10,
     marginTop: 5,
-  },
-  headerBackground: {
-    flex: 1,
-    resizeMode: 'cover',
   },
 });
 

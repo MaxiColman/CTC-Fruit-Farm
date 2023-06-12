@@ -25,10 +25,11 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
         color: 'blue',
         padding: 10,
-        marginTop: 10,
+        marginTop: 20,
         marginLeft: 35,
         marginRight: 35,
         borderRadius: 5,
+        marginBottom: 20,
     },
     text: {
         color: 'white',

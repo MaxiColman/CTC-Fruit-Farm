@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, Alert } from 'react-n
 import MyInputText from '../../../components/MyInputText'
 import MyText from '../../../components/MyText'
 import SingleButton from '../../../components/SingleButton'
-import DatabaseConecction from '../../../database/db-connection'
+import Icon from 'react-native-vector-icons/Entypo';
 import { useNavigation } from "@react-navigation/native";
-import { ImageBackground } from 'react-native'
+import DatabaseConecction from '../../../database/db-connection'
 const db = DatabaseConecction.getConnection();
 
 const AddUser = () => {
@@ -81,64 +81,99 @@ const AddUser = () => {
     setCedula("");
   }
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../../assets/Imagenes/Fondo3.jpg')}
-        style={styles.headerBackground}
-      >
-        <SafeAreaView>
-          <ScrollView>
-            <MyText textValue="Formulario de ingreso de usuarios:" textStyle={styles.title} />
-            <MyInputText
-              style={styles.input}
-              placeholder="Nombre"
-              onChangeText={handleUserName}
-              value={userName}
-            />
-            <MyInputText
-              style={styles.input}
-              placeholder="Apellido"
-              onChangeText={handleLastName}
-              value={lastName}
-            />
-            <MyInputText
-              style={styles.input}
-              placeholder="Cedula"
-              onChangeText={handleUserCi}
-              keyboardType="numeric"
-              value={cedula}
-            />
-            <SingleButton
-              title="Registrar Usuario"
-              btnColor="green"
-              onPress={addUser}
-            />
-          </ScrollView>
-        </SafeAreaView>
-      </ImageBackground>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <MyText textValue="Formulario ingreso de Usuarios:" textStyle={styles.title} />
+        <View style={styles.formContainer}>
+          <Icon name="user" size={20} color="black" style={styles.icon} />
+          <Text style={styles.title2}>Nombre:</Text>
+          <MyInputText
+            style={styles.input}
+            placeholder="Ingrese un nombre"
+            onChangeText={handleUserName}
+            value={userName}
+          />
+          <Icon name="users" size={20} color="black" style={styles.icon1} />
+          <Text style={styles.title2}>Apellido:</Text>
+          <MyInputText
+            style={styles.input}
+            placeholder="Ingrese un apellido"
+            onChangeText={handleLastName}
+            value={lastName}
+          />
+          <Icon name="v-card" size={20} color="black" style={styles.icon2} />
+          <Text style={styles.title2}>Cedula:</Text>
+          <MyInputText
+            style={styles.input}
+            placeholder="Ingrese una cedula"
+            onChangeText={handleUserCi}
+            keyboardType="numeric"
+            value={cedula}
+          />
+          <SingleButton
+            title="Registrar Usuario"
+            btnColor="green"
+            onPress={addUser}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E8EAF6',
   },
   formContainer: {
+    marginTop: 15,
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 2,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    margin: 10,
+    borderRadius: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  },
+  icon: {
+    position: 'absolute',
+    left: 45,
+    top: 27,
+  },
+  icon1: {
+    position: 'absolute',
+    left: 45,
+    top: 146,
+  },
+  icon2: {
+    position: 'absolute',
+    left: 45,
+    top: 266,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
-    marginTop: 15,
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 45,
   },
-  headerBackground: {
-    flex: 1,
-    resizeMode: 'cover',
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: 70,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 10,
   },
   input: {
     width: '85%',

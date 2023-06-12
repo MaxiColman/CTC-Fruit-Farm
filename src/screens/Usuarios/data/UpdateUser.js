@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert, } from "react-native";
+import { StyleSheet, View, SafeAreaView, ScrollView, Text, Alert, } from "react-native";
 import MyText from "../../../components/MyText";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
+import ModalDelete from "../../../components/ModalDelete";
+import Icon from 'react-native-vector-icons/Entypo';
 import { useNavigation } from "@react-navigation/native";
 import DatabaseConnection from "../../../database/db-connection";
-import { ImageBackground } from "react-native";
-
 const db = DatabaseConnection.getConnection();
 
 const UpdateUser = () => {
@@ -15,6 +15,7 @@ const UpdateUser = () => {
   const [userName, setUserName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cedula, setCedula] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const navigation = useNavigation();
 
   // metodo para setear los estados
@@ -33,6 +34,16 @@ const UpdateUser = () => {
   const handleCedula = (cedula) => {
     setCedula(cedula);
   };
+
+  const openConfirmationModal = () => {
+    if (!userName || !userName.trim()) {
+      Alert.alert("Error", "El nombre de usuario es obligatorio");
+      return;
+    }
+  
+    setShowConfirmationModal(true);
+  };
+
   // metodo validar datos
   const validateData = () => {
     if (!userName && !userName.length && userName === "" && !userName.trim()) {
@@ -118,58 +129,67 @@ const UpdateUser = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../../assets/Imagenes/Fondo3.jpg')}
-        style={styles.headerBackground}
-      >
-        <SafeAreaView style={styles.container}>
-
-          <View style={styles.generalView}>
-            <ScrollView>
-              <KeyboardAvoidingView style={styles.keyboardView}>
-                <MyText textValue="Buscar usuario:" textStyle={styles.title} />
-                <MyInputText
-                  placeholder="Ingrese el nombre de usuario"
-                  onChangeText={handleUserNameSearch}
-                  styles={styles.input}
-                  value={userNameSearch}
-                />
-                <SingleButton
-                  title="Buscar"
-                  onPress={searchUser}
-                  btnColor='green'
-                />
-                <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
-                <MyInputText
-                  placeholder="Nombre de usuario"
-                  value={userName}
-                  onChangeText={handleUserName}
-                />
-
-                <MyInputText
-                  placeholder="Apellido del usuario"
-                  value={lastName}
-                  onChangeText={handleUserLastName}
-                />
-
-                <MyInputText
-                  placeholder="Cedula del usuario"
-                  value={cedula}
-                  onChangeText={handleCedula}
-                />
-
-                <SingleButton
-                  title="Editar" onPress={() => editUser()}
-                  btnColor="green"
-                />
-
-              </KeyboardAvoidingView>
-            </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.generalView}>
+        <ScrollView>
+          <MyText textValue="Buscar usuario:" textStyle={styles.title} />
+          <View style={styles.formContainer}>
+            <Icon name="user" size={20} color="black" style={styles.icon} />
+            <Text style={styles.title2}>Nombre del Usuario:</Text>
+            <MyInputText
+              placeholder="Ingrese el nombre"
+              onChangeText={handleUserNameSearch}
+              styles={styles.input}
+              value={userNameSearch}
+            />
+            <SingleButton
+              title="Buscar Usuario"
+              onPress={searchUser}
+              btnColor='green'
+            />
           </View>
-        </SafeAreaView>
-      </ImageBackground>
-    </View>
+          <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
+          <View style={styles.formContainer}>
+            <Icon name="user" size={20} color="black" style={styles.icon1} />
+            <Text style={styles.title2}>Nombre del Usuario:</Text>
+            <MyInputText
+              placeholder="Ingrese el nombre"
+              value={userName}
+              onChangeText={handleUserName}
+            />
+            <Icon name="users" size={20} color="black" style={styles.icon2} />
+            <Text style={styles.title2}>Apellido del Usuario:</Text>
+            <MyInputText
+              placeholder="Ingrese el apellido"
+              value={lastName}
+              onChangeText={handleUserLastName}
+            />
+            <Icon name="v-card" size={20} color="black" style={styles.icon3} />
+            <Text style={styles.title2}>Cedula del Usuario:</Text>
+            <MyInputText
+              placeholder="Ingrese la cedula"
+              value={cedula}
+              onChangeText={handleCedula}
+            />
+            <SingleButton
+              style={styles.button}
+              title="Modificar Usuario"
+              btnColor="green"
+              onPress={openConfirmationModal}
+            />
+            <ModalDelete
+              visible={showConfirmationModal}
+              message="¿Estás seguro que deseas modificar este usuario?"
+              onConfirm={() => {
+                setShowConfirmationModal(false);
+                editUser();
+              }}
+              onCancel={() => setShowConfirmationModal(false)}
+            />
+          </View>
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -178,13 +198,61 @@ const UpdateUser = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E8EAF6',
+  },
+  formContainer: {
+    marginTop: 15,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    flex: 1,
+    marginBottom: 15,
+  },
+  icon: {
+    position: 'absolute',
+    left: 65,
+    top: 22,
+  },
+  icon1: {
+    position: 'absolute',
+    left: 65,
+    top: 22,
+  },
+  icon2: {
+    position: 'absolute',
+    left: 65,
+    top: 136,
+  },
+  icon3: {
+    position: 'absolute',
+    left: 65,
+    top: 252,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
     marginTop: 15,
+  },
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: 72,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 5,
   },
   generalView: {
     flex: 1,
@@ -200,10 +268,6 @@ const styles = StyleSheet.create({
   keyboardView: {
     flex: 1,
     justifyContent: "space-between",
-  },
-  headerBackground: {
-    flex: 1,
-    resizeMode: 'cover',
   },
 });
 
