@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, SafeAreaView, FlatList, Alert } from 'react-native'
 import MyText from '../../../components/MyText'
 import { useNavigation } from '@react-navigation/native'
+import { ImageBackground } from "react-native";
 import DatabaseConecction from '../../../database/db-connection'
 const db = DatabaseConecction.getConnection();
 
@@ -37,15 +38,15 @@ const listItemView = (item) => {
     
   return (
       <View key={item.id} style={styles.listItemView}>
-        <MyText textValue="Nombre del lugar:" textStyle={styles.textStyle} />
+        <MyText textValue="Nombre del lugar:" textStyle={styles.title} />
         <MyText textValue={item.lugar} textStyle={styles.textStyle} />
-        <MyText textValue="Nombre del Departamento:" textStyle={styles.textStyle} />
+        <MyText textValue="Nombre del Departamento:" textStyle={styles.title} />
         <MyText textValue={item.depto} textStyle={styles.textStyle} />
-        <MyText textValue="Cantidad Trabajadores:" textStyle={styles.textStyle} />
+        <MyText textValue="Cantidad Trabajadores:" textStyle={styles.title} />
         <MyText textValue={item.cantTrab} textStyle={styles.textStyle} />
-        <MyText textValue="Latitud:" textStyle={styles.textStyle} />
+        <MyText textValue="Latitud:" textStyle={styles.title} />
         <MyText textValue={item.latitud} textStyle={styles.textStyle} />
-        <MyText textValue="Longitud" textStyle={styles.textStyle} />
+        <MyText textValue="Longitud" textStyle={styles.title} />
         <MyText textValue={item.longitud} textStyle={styles.textStyle} />
       </View>
     );
@@ -54,6 +55,11 @@ const listItemView = (item) => {
 
 
 return (
+  <View style={styles.container}>
+    <ImageBackground
+      source={require('../../../../assets/Imagenes/FondoFormularios2.jpg')}
+      style={styles.headerBackground}
+    >
   <SafeAreaView style={styles.container}>
     <View>
       <View>
@@ -64,8 +70,11 @@ return (
           contentContainerStyle={{ paddingHorizontal: 15 }}
         />
       </View>
-    </View>
+      </View>
+    
   </SafeAreaView>
+  </ImageBackground>
+  </View>
 )
 }
 
@@ -74,16 +83,36 @@ const styles = StyleSheet.create({
     flex: 1
   },
   textStyle: {
-    color: 'black',
+    color: 'red',
+    fontSize: 18,
+    fontWeight: 'bold',
     padding: 5,
     alignContent: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  headerBackground: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   listItemView: {
-    backgroundColor: 'white',
+    backgroundColor: '#C6E2CB',
     margin: 5,
     padding: 10,
     borderRadius: 10,
+  },
+  userInfoContainer: {
+    marginBottom: 3,
+  },
+  flatListContainer: {
+    paddingHorizontal: 15,
   },
 })
 
