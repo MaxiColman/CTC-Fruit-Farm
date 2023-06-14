@@ -4,18 +4,16 @@ import { useNavigation } from "@react-navigation/native";
 import MyText from '../../../components/MyText';
 import MyInputText from '../../../components/MyInputText';
 import SingleButton from '../../../components/SingleButton';
+import ModalDelete from '../../../components/ModalDelete';
 import DatabaseConnection from "../../../database/db-connection";
 const db = DatabaseConnection.getConnection();
 
 const DeleteInsumo = () => {
   const [insumoId, setInsumoId] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const navigation = useNavigation();
 
   const deleteInsumo = () => {
-    if (!insumoId || !insumoId.trim()) {
-      Alert.alert("Error", "El numero de ID del insumo es obligatorio");
-      return false;
-    }
 
     db.transaction((tx) => {
       tx.executeSql(
@@ -57,47 +55,92 @@ const DeleteInsumo = () => {
     setInsumoId(id);
   }
 
+  const openConfirmationModal = () => {
+    if (!insumoId || !insumoId.trim()) {
+      Alert.alert("Error", "El ID del Insumo es obligatorio");
+      return;
+    }
+
+    setShowConfirmationModal(true);
+  };
+
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.generalView}>
-          <ScrollView>
-            <MyText textValue="Formulario para eliminar un insumo" textStyle={styles.title} />
-            <KeyboardAvoidingView>
-              <MyInputText
-                style={styles.input}
-                placeholder="ID del Insumo que quiere borrar"
-                onChangeText={handleInsumoId}
-                keyboardType='numeric'
-                value={insumoId}
-              />
-              <SingleButton
-                style={styles.button}
-                title="Borrar Insumo"
-                btnColor="green"
-                onPress={deleteInsumo}
-              />
-            </KeyboardAvoidingView>
-          </ScrollView>
+      <ScrollView>
+        <MyText textValue="Formulario para eliminar un Insumo" textStyle={styles.title} />
+        <View style={styles.formContainer}>
+          <KeyboardAvoidingView>
+          <MyText textValue="Ingrese ID del Insumo a borrar" textStyle={styles.title2} />
+            <MyInputText
+              style={styles.input}
+              placeholder="Ingrese un ID"
+              onChangeText={handleInsumoId}
+              keyboardType='numeric'
+              value={insumoId}
+            />
+            <SingleButton
+              style={styles.button}
+              title="Borrar Insumo"
+              btnColor="green"
+              onPress={openConfirmationModal}
+            />
+            <ModalDelete
+              visible={showConfirmationModal}
+              message="¿Estás seguro que deseas eliminar este Insumo?"
+              onConfirm={() => {
+                setShowConfirmationModal(false);
+                deleteInsumo();
+              }}
+              onCancel={() => setShowConfirmationModal(false)}
+            />
+          </KeyboardAvoidingView>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    backgroundColor: '#E8EAF6',
+  },
+  formContainer: {
+    marginTop: 15,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    flex: 1,
   },
   content: {
     width: '100%',
     marginTop: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 45,
+  },
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: 44,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 10,
   },
   input: {
     height: 40,

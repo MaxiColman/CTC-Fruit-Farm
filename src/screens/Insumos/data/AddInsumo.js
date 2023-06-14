@@ -11,122 +11,153 @@ const AddInsumo = () => {
 
   // estados para los campos del formulario
   const [insumoName, setInsumoName] = useState("");
-  const [ cantidadLitros, setCantidadLitros] = useState("");
+  const [cantidadLitros, setCantidadLitros] = useState("");
 
   const navigation = useNavigation();
 
-// metodo para setear los estados
-const handleinsumoName = (insumoName) => {
-  setInsumoName(insumoName);
-}
+  // metodo para setear los estados
+  const handleinsumoName = (insumoName) => {
+    setInsumoName(insumoName);
+  }
 
-const handlecantidadLitros = (cantidadLitros) => {
-  setCantidadLitros(cantidadLitros);
-}
+  const handlecantidadLitros = (cantidadLitros) => {
+    setCantidadLitros(cantidadLitros);
+  }
 
-const addInsumos = () => {
-  console.log("### add insumos ###");
-  if (validateData()) {
-    console.log("### save insumos ###");
-    db.transaction((tx) => {
-      tx.executeSql(
-        'INSERT INTO insumos (insumoName, cantLitros) VALUES (?, ?)',
-        [insumoName, cantidadLitros],
-        (tx, results) => {
-          if (results.rowsAffected > 0) {
-            Alert.alert("Exito", "Insumo agregado correctamente", [
-              {
-                text: "Ok",
-                onPress: () => navigation.navigate("HomeInsumos"),
-              }
-            ],
-              {
-                text: "Cancel",
-                cancelable: false
-              });
-            clearData();
-          } else {
-            Alert.alert("Error", "Error al registrar el insumo");
+  const addInsumos = () => {
+    console.log("### add insumos ###");
+    if (validateData()) {
+      console.log("### save insumos ###");
+      db.transaction((tx) => {
+        tx.executeSql(
+          'INSERT INTO insumos (insumoName, cantLitros) VALUES (?, ?)',
+          [insumoName, cantidadLitros],
+          (tx, results) => {
+            if (results.rowsAffected > 0) {
+              Alert.alert("Exito", "Insumo agregado correctamente", [
+                {
+                  text: "Ok",
+                  onPress: () => navigation.navigate("HomeInsumos"),
+                }
+              ],
+                {
+                  text: "Cancel",
+                  cancelable: false
+                });
+              clearData();
+            } else {
+              Alert.alert("Error", "Error al registrar el insumo");
+            }
           }
-        }
-      )
-    });
-  }
-}
-
-// metodo validar datos
-const validateData = () => {
-  if (insumoName === "" && !insumoName.trim()) {
-    Alert.alert("Error", "El nombre del insumo es un campo obligatorio");
-    return false;
+        )
+      });
+    }
   }
 
-  if (cantidadLitros === "" && !cantidadLitros.trim()) {
-    Alert.alert("Error", "La cantidad de litros es un campo obligatoria");
-    return false;
+  // metodo validar datos
+  const validateData = () => {
+    if (insumoName === "" && !insumoName.trim()) {
+      Alert.alert("Error", "El nombre del insumo es un campo obligatorio");
+      return false;
+    }
+
+    if (cantidadLitros === "" && !cantidadLitros.trim()) {
+      Alert.alert("Error", "La cantidad de litros es un campo obligatoria");
+      return false;
+    }
+
+    return true;
   }
 
-  return true;
-}
+  //  clear de los datos
+  const clearData = () => {
+    setInsumoName("");
+    setCantidadLitros("");
+  }
 
-//  clear de los datos
-const clearData = () => {
-  setInsumoName("");
-  setCantidadLitros("");
-}
+  return (
 
-return (
-
-  <SafeAreaView>
-    <ScrollView>
+    <SafeAreaView>
+      <ScrollView>
         <MyText textValue="Formulario de ingreso de insumos:" textStyle={styles.title} />
-        <MyInputText
-          style={styles.input}
-          placeholder="Nombre del Insumo"
-          onChangeText={handleinsumoName}
-          value={insumoName}
-        />
-        <MyInputText
-          style={styles.input}
-          placeholder="Cantidad de litros"
-          onChangeText={handlecantidadLitros}
-          keyboardType="numeric"
-          value={cantidadLitros}
-        />
-        <SingleButton
-          title="Registrar Insumo"
-          btnColor="green"
-          onPress={addInsumos}
-        />
-    </ScrollView>
-  </SafeAreaView>
-);
+        <View style={styles.formContainer}>
+        <MyText textValue="Nombre:" textStyle={styles.title2} />
+          <MyInputText
+            style={styles.input}
+            placeholder="Ingrese un nombre"
+            onChangeText={handleinsumoName}
+            value={insumoName}
+          />
+          <MyText textValue="Cantidad de litros:" textStyle={styles.title2} />
+          <MyInputText
+            style={styles.input}
+            placeholder="Ingrese la cantidad de litros"
+            onChangeText={handlecantidadLitros}
+            keyboardType="numeric"
+            value={cantidadLitros}
+          />
+          <SingleButton
+            title="Registrar Insumo"
+            btnColor="green"
+            onPress={addInsumos}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-container: {
-flex: 1,
-},
-formContainer: {
-flex: 1,
-justifyContent: 'center',
-paddingHorizontal: 20,
-},
-title: {
-fontSize: 20,
-fontWeight: 'bold',
-marginBottom: 10,
-textAlign: 'center',
-marginTop: 15,
-},
-input: {
-height: 40,
-borderWidth: 2,
-borderColor: 'green',
-marginBottom: 10,
-paddingHorizontal: 10,
-marginTop: 10,
-},
+  container: {
+    flex: 1,
+    backgroundColor: '#E8EAF6',
+  },
+  formContainer: {
+    marginTop: 15,
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 2,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    margin: 10,
+    borderRadius: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 45,
+  },
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 10,
+  },
+  input: {
+    width: '80%',
+    alignSelf: 'center',
+    height: 50,
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginBottom: 10,
+    paddingHorizontal: 35,
+    marginTop: 20,
+  },
 });
 
 export default AddInsumo

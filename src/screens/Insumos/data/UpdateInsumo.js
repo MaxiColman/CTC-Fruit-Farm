@@ -4,6 +4,7 @@ import MyText from "../../../components/MyText";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
 import { useNavigation } from "@react-navigation/native";
+import ModalDelete from "../../../components/ModalDelete";
 import DatabaseConnection from "../../../database/db-connection";
 const db = DatabaseConnection.getConnection();
 
@@ -13,6 +14,7 @@ const UpdateInsumo = () => {
   const [InsumoId, setInsumoId] = useState("");
   const [insumoName, setInsumoName] = useState("");
   const [cantidadLitros, setCantLitros] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const navigation = useNavigation();
 
@@ -28,6 +30,14 @@ const UpdateInsumo = () => {
   const handleCantidadLitros = (cantLitros) => {
     setCantLitros(cantLitros);
   }
+  const openConfirmationModal = () => {
+    if (!InsumoId || !InsumoId.trim()) {
+      Alert.alert("Error", "El campo ID Insumo es obligatorio");
+      return;
+    }
+
+    setShowConfirmationModal(true);
+  };
 
   const editInsumos = () => {
     if (validateData()) {
@@ -109,46 +119,56 @@ const UpdateInsumo = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.viewContainer}>
-        <View style={styles.generalView}>
-          <ScrollView>
-            <KeyboardAvoidingView style={styles.keyboardView}>
-              <MyText textValue="Buscar Insumo:" textStyle={styles.title} />
-              <MyInputText
-                placeholder="Ingrese el ID del Insumo a buscar"
-                onChangeText={handlesetInsumoId}
-                keyboardType="numeric"
-                styles={styles.input}
-                value={InsumoId}
-              />
-              <SingleButton
-                title="Buscar Insumo"
-                onPress={searchInsumo}
-                btnColor='green'
-              />
-              <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
-              <MyInputText
-                placeholder="Nombre del insumo"
-                value={insumoName}
-                onChangeText={handleinsumoName}
-              />
-
-              <MyInputText
-                placeholder="Cantidad de litros"
-                value={cantidadLitros}
-                onChangeText={handleCantidadLitros}
-              />
-
-              <SingleButton
-                title="Editar Insumo"
-                onPress={() => editInsumos()}
-                btnColor="green"
-              />
-
-            </KeyboardAvoidingView>
-          </ScrollView>
-        </View>
-      </View>
+      <ScrollView>
+        <KeyboardAvoidingView style={styles.keyboardView}>
+          <MyText textValue="Formulario para modificar Insumos:" textStyle={styles.title} />
+          <View style={styles.formContainer}>
+            <MyText textValue="Buscar Insumo:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese el ID"
+              onChangeText={handlesetInsumoId}
+              keyboardType="numeric"
+              styles={styles.input}
+              value={InsumoId}
+            />
+            <SingleButton
+              title="Buscar Insumo"
+              onPress={searchInsumo}
+              btnColor='green'
+            />
+          </View>
+          <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
+          <View style={styles.formContainer}>
+            <MyText textValue="Nombre:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese nombre del insumo"
+              value={insumoName}
+              onChangeText={handleinsumoName}
+            />
+            <MyText textValue="Cantidad de litros:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese cantidad de litros"
+              value={cantidadLitros}
+              onChangeText={handleCantidadLitros}
+            />
+            <SingleButton
+              style={styles.button}
+              title="Editar Insumo"
+              btnColor="green"
+              onPress={openConfirmationModal}
+            />
+            <ModalDelete
+              visible={showConfirmationModal}
+              message="¿Estás seguro que deseas modificar este Insumo?"
+              onConfirm={() => {
+                setShowConfirmationModal(false);
+                editInsumos();
+              }}
+              onCancel={() => setShowConfirmationModal(false)}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -158,20 +178,45 @@ const UpdateInsumo = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E8EAF6',
+  },
+  formContainer: {
+    marginTop: 15,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    flex: 1,
+    marginBottom: 15,
   },
   viewContainer: {
     flex: 1,
     backgroundColor: "white",
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
     marginTop: 15,
   },
-  generalView: {
-    flex: 1,
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 5,
   },
   textStyle: {
     padding: 10,
@@ -181,10 +226,6 @@ const styles = StyleSheet.create({
   input: {
     padding: 15
   },
-  keyboardView: {
-    flex: 1,
-    justifyContent: "space-between",
-  }
 })
 
 export default UpdateInsumo

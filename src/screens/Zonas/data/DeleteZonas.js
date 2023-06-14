@@ -5,18 +5,16 @@ import MyText from '../../../components/MyText';
 import MyInputText from '../../../components/MyInputText';
 import SingleButton from '../../../components/SingleButton';
 import DatabaseConnection from "../../../database/db-connection";
+import ModalDelete from '../../../components/ModalDelete';
 const db = DatabaseConnection.getConnection();
 
 const DeleteZonas = () => {
   const [ZonaId, setZonaId] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const navigation = useNavigation();
 
   const deleteZona = () => {
-    if (!ZonaId || !ZonaId.trim()) {
-      Alert.alert("Error", "El numero de ID de la zona es obligatorio");
-      return false;
-    }
-
+   
     db.transaction((tx) => {
       tx.executeSql(
         'DELETE FROM zonas WHERE id = ?',
@@ -31,17 +29,19 @@ const DeleteZonas = () => {
               }
             ],
               {
+                text: "Cancel",
                 cancelable: false
               }
             );
           } else {
-            Alert.alert("Error", "El usuario no existe", [
+            Alert.alert("Error", "La zona no existe", [
               {
                 text: "Ok",
                 onPress: () => navigation.navigate("HomeZonas"),
               }
             ],
               {
+                text: "Cancel",
                 cancelable: false
               }
             )
@@ -55,47 +55,91 @@ const DeleteZonas = () => {
     setZonaId(id);
   }
 
+  const openConfirmationModal = () => {
+    if (!ZonaId || !ZonaId.trim()) {
+      Alert.alert("Error", "El ID de la zona es obligatorio");
+      return;
+    }
+  
+    setShowConfirmationModal(true);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.generalView}>
-          <ScrollView>
-            <MyText textValue="Formulario para eliminar una zona" textStyle={styles.title} />
-            <KeyboardAvoidingView>
-              <MyInputText
-                style={styles.input}
-                placeholder="ID de la zona que quiere borrar"
-                onChangeText={handleZonaId}
-                keyboardType='numeric'
-                value={ZonaId}
-              />
-              <SingleButton
-                style={styles.button}
-                title="Borrar Zona"
-                btnColor="green"
-                onPress={deleteZona}
-              />
-            </KeyboardAvoidingView>
-          </ScrollView>
+      <ScrollView>
+        <MyText textValue="Formulario para eliminar una zona" textStyle={styles.title} />
+        <View style={styles.formContainer}>
+          <KeyboardAvoidingView>
+            <MyText textValue="Ingrese ID de la zona a borrar" textStyle={styles.title2} />
+            <MyInputText
+              style={styles.input}
+              placeholder="ID de la zona"
+              onChangeText={handleZonaId}
+              keyboardType='numeric'
+              value={ZonaId}
+            />
+            <SingleButton
+              style={styles.button}
+              title="Borrar Zona"
+              btnColor="green"
+              onPress={openConfirmationModal}
+            />
+            <ModalDelete
+              visible={showConfirmationModal}
+              message="¿Estás seguro que deseas eliminar esta zona?"
+              onConfirm={() => {
+                setShowConfirmationModal(false);
+                deleteZona();
+              }}
+              onCancel={() => setShowConfirmationModal(false)}
+            />
+          </KeyboardAvoidingView>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    backgroundColor: '#E8EAF6',
+  },
+  formContainer: {
+    marginTop: 15,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    flex: 1,
   },
   content: {
     width: '100%',
     marginTop: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 45,
+  },
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: 44,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 10,
   },
   input: {
     height: 40,

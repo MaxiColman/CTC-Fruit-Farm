@@ -27,7 +27,10 @@ const ViewallUsers = () => {
                 onPress: () => navigation.navigate("HomeUsuarios"),
               },
             ],
-            { cancelable: false }
+            { 
+              text: "Cancel",
+              cancelable: false 
+            }
           );
         }
       });
@@ -35,11 +38,14 @@ const ViewallUsers = () => {
   }, []);
 
   const listItemView = (item) => {
-    console.log("### algo ###", item);
 
     return (
       <View key={item.id} style={styles.formContainer}>
       <Text style={styles.title2}>Informacion del Usuario:</Text>
+      <View style={styles.userInfoContainer}>
+          <MyText textValue="ID del Usuario:" textStyle={styles.title} />
+          <MyText textValue={item.id} textStyle={styles.textStyle} />
+        </View>
         <View style={styles.userInfoContainer}>
           <MyText textValue="Nombre:" textStyle={styles.title} />
           <MyText textValue={item.userName} textStyle={styles.textStyle} />

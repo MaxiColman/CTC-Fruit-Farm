@@ -3,6 +3,7 @@ import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert
 import MyText from "../../../components/MyText";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
+import ModalDelete from "../../../components/ModalDelete";
 import { useNavigation } from "@react-navigation/native";
 import DatabaseConnection from "../../../database/db-connection";
 
@@ -16,6 +17,7 @@ const UpdateZonas = () => {
   const [cantTrab, setCantTrabajo] = useState("");
   const [latitud, setLatitud] = useState("");
   const [longitud, setLongitud] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const navigation = useNavigation();
 
@@ -44,6 +46,15 @@ const UpdateZonas = () => {
   const handleLongitud = (longitud) => {
     setLongitud(longitud);
   }
+
+  const openConfirmationModal = () => {
+    if (!ZonaId || !ZonaId.trim()) {
+      Alert.alert("Error", "El campo ID Zona es obligatorio");
+      return;
+    }
+
+    setShowConfirmationModal(true);
+  };
 
   // metodo validar datos
   const validateData = () => {
@@ -146,62 +157,73 @@ const UpdateZonas = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.viewContainer}>
-        <View style={styles.generalView}>
-          <ScrollView>
-            <KeyboardAvoidingView style={styles.keyboardView}>
-              <MyText textValue="Buscar zona:" textStyle={styles.title} />
-              <MyInputText
-                placeholder="Ingrese el ID de la zona a buscar"
-                onChangeText={handlesetZonaId}
-                styles={styles.input}
-                value={ZonaId}
-              />
-              <SingleButton
-                title="Buscar"
-                onPress={searchZona}
-                btnColor='green'
-              />
-              <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
-              <MyInputText
-                placeholder="Nombre del lugar"
-                value={lugar}
-                onChangeText={handleLugar}
-              />
-
-              <MyInputText
-                placeholder="Nombre del departamento"
-                value={depto}
-                onChangeText={handleDepartamento}
-              />
-
-              <MyInputText
-                placeholder="Cantidad de trabajadores"
-                value={cantTrab}
-                onChangeText={handleCantTrabajo}
-              />
-
-              <MyInputText
-                placeholder="Latitud"
-                value={latitud}
-                onChangeText={handleLatitud}
-              />
-              <MyInputText
-                placeholder="Longitud"
-                value={longitud}
-                onChangeText={handleLongitud}
-              />
-
-              <SingleButton
-                title="Editar Zona"
-                onPress={() => editZonas()}
-                btnColor="green"
-              />
-
-            </KeyboardAvoidingView>
-          </ScrollView>
-        </View>
-      </View>
+      <ScrollView>
+        <KeyboardAvoidingView>
+          <MyText textValue="Formulario para modificar Zonas:" textStyle={styles.title} />
+          <View style={styles.formContainer}>
+            <MyText textValue="Buscar Zona:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese el ID"
+              onChangeText={handlesetZonaId}
+              styles={styles.input}
+              value={ZonaId}
+            />
+            <SingleButton
+              title="Buscar Zona"
+              onPress={searchZona}
+              btnColor='green'
+            />
+          </View>
+          <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
+          <View style={styles.formContainer}>
+            <MyText textValue="Lugar:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese el tipo de lugar"
+              value={lugar}
+              onChangeText={handleLugar}
+            />
+            <MyText textValue="Departamento:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese un departamento"
+              value={depto}
+              onChangeText={handleDepartamento}
+            />
+            <MyText textValue="Cantidad de trabajadores:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese cantidad de trabajadores"
+              value={cantTrab}
+              onChangeText={handleCantTrabajo}
+            />
+            <MyText textValue="Latitud:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese latitud"
+              value={latitud}
+              onChangeText={handleLatitud}
+            />
+            <MyText textValue="Longitud:" textStyle={styles.title2} />
+            <MyInputText
+              placeholder="Ingrese longitud"
+              value={longitud}
+              onChangeText={handleLongitud}
+            />
+            <SingleButton
+              style={styles.button}
+              title="Editar Zona"
+              btnColor="green"
+              onPress={openConfirmationModal}
+            />
+            <ModalDelete
+              visible={showConfirmationModal}
+              message="¿Estás seguro que deseas modificar esta Zona?"
+              onConfirm={() => {
+                setShowConfirmationModal(false);
+                editZonas();
+              }}
+              onCancel={() => setShowConfirmationModal(false)}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -210,20 +232,45 @@ const UpdateZonas = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E8EAF6',
+  },
+  formContainer: {
+    marginTop: 15,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    flex: 1,
+    marginBottom: 15,
   },
   viewContainer: {
     flex: 1,
     backgroundColor: "white",
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
     marginTop: 15,
   },
-  generalView: {
-    flex: 1,
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 5,
   },
   textStyle: {
     padding: 10,
@@ -233,10 +280,6 @@ const styles = StyleSheet.create({
   input: {
     padding: 15
   },
-  keyboardView: {
-    flex: 1,
-    justifyContent: "space-between",
-  }
 });
 
 export default UpdateZonas

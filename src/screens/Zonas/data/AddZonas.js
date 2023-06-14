@@ -56,6 +56,7 @@ const AddZonas = () => {
                 }
               ],
                 {
+                  text: "Cancel",
                   cancelable: false
                 });
               clearData();
@@ -109,10 +110,11 @@ const AddZonas = () => {
 
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
-        <ScrollView>
-          <MyText textValue="Formulario de ingreso de zonas:" textStyle={styles.title} />
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <MyText textValue="Formulario de ingreso de zonas:" textStyle={styles.title} />
+        <View style={styles.formContainer}>
+        <MyText textValue="Seleccione un lugar:" textStyle={styles.title2} />
           <View style={styles.input}>
             <Picker
               selectedValue={lugar}
@@ -123,28 +125,32 @@ const AddZonas = () => {
               <Picker.Item label="Plantacion" value="Plantacion" />
             </Picker>
           </View>
+          <MyText textValue="Departamento:" textStyle={styles.title2} />
           <MyInputText
             style={styles.input}
-            placeholder="Departamento"
+            placeholder="Ingrese un Departamento"
             onChangeText={handleDepartamento}
             value={depto}
           />
+          <MyText textValue="Cantidad de trabajadores:" textStyle={styles.title2} />
           <MyInputText
             style={styles.input}
-            placeholder="Cantidad de trabajadores"
+            placeholder="Ingrese cantidad de trabajadores"
             onChangeText={handleCantTrabajo}
             keyboardType="numeric"
             value={cantTrab}
           />
+          <MyText textValue="Latitud:" textStyle={styles.title2} />
           <MyInputText
             style={styles.input}
-            placeholder="Latitud"
+            placeholder="Ingrese una latitud"
             onChangeText={handleLatitud}
             value={latitud}
           />
+          <MyText textValue="Longitud:" textStyle={styles.title2} />
           <MyInputText
             style={styles.input}
-            placeholder="Longitud"
+            placeholder="Ingrese una longitud"
             onChangeText={handleLongitud}
             value={longitud}
           />
@@ -153,28 +159,50 @@ const AddZonas = () => {
             btnColor="green"
             onPress={addZonas}
           />
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#E8EAF6',
   },
   formContainer: {
+    marginTop: 15,
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 2,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 5,
+    margin: 10,
+    borderRadius: 10,
+    padding: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
-    marginTop: 15,
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 45,
+  },
+  title2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    marginTop: 10,
   },
   input: {
     width: '80%',

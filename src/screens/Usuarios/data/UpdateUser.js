@@ -130,7 +130,6 @@ const UpdateUser = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.generalView}>
         <ScrollView>
           <MyText textValue="Buscar usuario:" textStyle={styles.title} />
           <View style={styles.formContainer}>
@@ -173,7 +172,7 @@ const UpdateUser = () => {
             />
             <SingleButton
               style={styles.button}
-              title="Modificar Usuario"
+              title="Editar Usuario"
               btnColor="green"
               onPress={openConfirmationModal}
             />
@@ -188,7 +187,6 @@ const UpdateUser = () => {
             />
           </View>
         </ScrollView>
-      </View>
     </SafeAreaView>
   );
 };
@@ -253,14 +251,6 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,
     marginTop: 5,
-  },
-  generalView: {
-    flex: 1,
-  },
-  textStyle: {
-    padding: 10,
-    marginLeft: 20,
-    color: "black",
   },
   input: {
     padding: 15
