@@ -52,7 +52,7 @@ const listItemView = (item) => {
       </View>
       <View style={styles.userInfoContainer}>
         <MyText textValue="Cantidad de litros:" textStyle={styles.title} />
-        <MyText textValue={item.cantidadLitros} textStyle={styles.textStyle} />
+        <MyText textValue={item.cantLitros} textStyle={styles.textStyle} />
       </View>
     </View>
   );
