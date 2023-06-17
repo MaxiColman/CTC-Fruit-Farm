@@ -37,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
                 title="Observaciones"
                 btnColor="#31994d"
                 btnIcon="compass"
-                onPress={() => console.log('click')}
+                onPress={() => navigation.navigate('HomeObservaciones')}
               />
                <Button
                 title="Tratamientos"

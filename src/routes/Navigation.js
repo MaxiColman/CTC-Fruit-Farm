@@ -21,11 +21,19 @@ import ViewAllZonas from '../screens/Zonas/data/ViewAllZonas';
 /*---------------------------------------------------------------*/
 /* ZONA DE IMPORT DE COMPONENTES DE INSUMOS*/
 import HomeInsumos from '../screens/Insumos/HomeInsumos';
-import AddInsumo from '../screens/Insumos/data/AddInsumo'
-import DeleteInsumo from '../screens/Insumos/data/DeleteInsumo'
-import UpdateInsumo from '../screens/Insumos/data/UpdateInsumo'
-import ViewInsumo from '../screens/Insumos/data/ViewInsumo'
-import ViewallInsumos from '../screens/Insumos/data/ViewallInsumos'
+import AddInsumo from '../screens/Insumos/data/AddInsumo';
+import DeleteInsumo from '../screens/Insumos/data/DeleteInsumo';
+import UpdateInsumo from '../screens/Insumos/data/UpdateInsumo';
+import ViewInsumo from '../screens/Insumos/data/ViewInsumo';
+import ViewallInsumos from '../screens/Insumos/data/ViewallInsumos';
+/*---------------------------------------------------------------*/
+/* ZONA DE IMPORT DE COMPONENTES DE OBSERVACIONES*/
+import HomeObservaciones from '../screens/Observaciones/HomeObservaciones';
+import AddObservacion from '../screens/Observaciones/data/AddObservacion';
+import DeleteObservacion from '../screens/Observaciones/data/DeleteObservacion';
+import UpdateObservacion from '../screens/Observaciones/data/UpdateObservacion';
+import ViewObservacion from '../screens/Observaciones/data/ViewObservacion';
+import ViewAllObservaciones from '../screens/Observaciones/data/ViewAllObservaciones';
 /*---------------------------------------------------------------*/
 
 
@@ -328,6 +336,97 @@ const Navigation = () => {
                     component={ViewallInsumos}
                     options={{
                         title: "Todos los Insumos",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                {/* PANTALLA HOMEOBSERVACIONES(OBSERVACIONES) */}
+                <Stack.Screen
+                    name="HomeObservaciones"
+                    component={HomeObservaciones}
+                    options={{
+                        title: "OBSERVACIONES",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="AddObservacion"
+                    component={AddObservacion}
+                    options={{
+                        title: "Agregar Observación",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="DeleteObservacion"
+                    component={DeleteObservacion}
+                    options={{
+                        title: "Borrar Observación",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="UpdateObservacion"
+                    component={UpdateObservacion}
+                    options={{
+                        title: "Modificar Observación",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="ViewObservacion"
+                    component={ViewObservacion}
+                    options={{
+                        title: "Ver Observación",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="ViewAllObservaciones"
+                    component={ViewAllObservaciones}
+                    options={{
+                        title: "Todas las Observaciones",
                         headerStyle: {
                             backgroundColor: "#31994d",
                         },
