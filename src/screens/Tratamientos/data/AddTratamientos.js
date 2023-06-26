@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Alert } from 'react-native';
 import MyInputText from '../../../components/MyInputText';
+import MyText from '../../../components/MyText';
 import SingleButton from '../../../components/SingleButton';
 import DatabaseConnection from '../../../database/db-connection';
 import CustomPicker from '../../../components/CustomPicker';
@@ -9,16 +10,18 @@ import { useNavigation } from '@react-navigation/native';
 const db = DatabaseConnection.getConnection();
 
 const AddTratamiento = () => {
+
+    //Datos de los campos de los formularios
     const [identificacion, setIdentificacion] = useState('');
     const [nombreTratamiento, setNombreTratamiento] = useState('');
-    const [selectedZona, setSelectedZona] = useState('');
-    const [selectedUsuario, setSelectedUsuario] = useState('');
-    const [selectedObservacion, setSelectedObservacion] = useState('');
-    const [selectedInsumo, setSelectedInsumo] = useState('');
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
     const [tiempo, setTiempo] = useState('');
     const [ordenTrabajo, setOrdenTrabajo] = useState('');
+    const [selectedZona, setSelectedZona] = useState('');
+    const [selectedUsuario, setSelectedUsuario] = useState('');
+    const [selectedObservacion, setSelectedObservacion] = useState('');
+    const [selectedInsumo, setSelectedInsumo] = useState('');
 
     //Guardo los datos que traigo de la Base de Datos
     const [zonas, setZonas] = useState([]);
@@ -28,13 +31,17 @@ const AddTratamiento = () => {
 
     const navigation = useNavigation();
 
+    //Agrego un tratamiento
     const addTratamiento = () => {
+        console.log("### add user ###");
         if (validateData()) {
+            console.log("### save user ###");
             db.transaction((tx) => {
                 tx.executeSql(
-                    'INSERT INTO tratamientos (identificacion, nombreTratamiento, zonas, users, fechaInicio, fechaFin, tiempo, ordenTrabajo, insumos, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    'INSERT INTO tratamientos (identificacion, nombre, zonas, users, fechaInicio, fechaFin, tiempo, ordenTrabajo, insumos, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                     [identificacion, nombreTratamiento, selectedZona, selectedUsuario, fechaInicio, fechaFin, tiempo, ordenTrabajo, selectedInsumo, selectedObservacion],
                     (_, results) => {
+                        console.log("### results ###", results);
                         if (results.rowsAffected > 0) {
                             Alert.alert(
                                 'Éxito',
@@ -59,6 +66,7 @@ const AddTratamiento = () => {
         }
     };
 
+    //Funciones para traer datos que queremos de la base de datos
     useEffect(() => {
         fetchZonas();
         fetchUsuarios();
@@ -115,12 +123,37 @@ const AddTratamiento = () => {
         });
     };
 
+    //Seteo los estados
+    const handleIdentChange = (identificacion) => {
+        setIdentificacion(identificacion);
+    };
+
+    const handleNomTratChange = (nombreTratamiento) => {
+        setNombreTratamiento(nombreTratamiento);
+    };
+
     const handleZonaChange = (value) => {
         setSelectedZona(value);
     };
 
     const handleUsuarioChange = (value) => {
         setSelectedUsuario(value);
+    };
+
+    const handleFechaIniChange = (fechaInicio) => {
+        setFechaInicio(fechaInicio);
+    };
+
+    const handleFechaFinChange = (fechaFin) => {
+        setFechaFin(fechaFin);
+    };
+
+    const handleTiempoChange = (tiempo) => {
+        setTiempo(tiempo);
+    };
+
+    const handleOrdenChange = (ordenTrabajo) => {
+        setOrdenTrabajo(ordenTrabajo);
     };
 
     const handleObservacionChange = (value) => {
@@ -131,28 +164,60 @@ const AddTratamiento = () => {
         setSelectedInsumo(value);
     };
 
+    // Validacion de todos los campos
     const validateData = () => {
         if (identificacion === '' || !identificacion.trim()) {
             Alert.alert('Error', 'La identificación es un campo obligatorio');
             return false;
         }
-
-        // Validar los demás campos...
+        if (nombreTratamiento === '' || !nombreTratamiento.trim()) {
+            Alert.alert('Error', 'El nombre de tratamiento es un campo obligatorio');
+            return false;
+        }
+        if (selectedZona === '' || !selectedZona.trim()) {
+            Alert.alert('Error', 'Seleccionar una zona es un campo obligatorio');
+            return false;
+        }
+        if (selectedUsuario === '' || !selectedUsuario.trim()) {
+            Alert.alert('Error', 'Seleccionar un usuario es un campo obligatorio');
+            return false;
+        }
+        if (selectedInsumo === '' || !selectedInsumo.trim()) {
+            Alert.alert('Error', 'Seleccionar un insumo es un campo obligatorio');
+            return false;
+        }
+        if (fechaInicio === '' || !fechaInicio.trim()) {
+            Alert.alert('Error', 'La fecha de inicio es un campo obligatorio');
+            return false;
+        }
+        if (fechaFin === '' || !fechaFin.trim()) {
+            Alert.alert('Error', 'La fecha final es un campo obligatorio');
+            return false;
+        }
+        if (tiempo === '' || !tiempo.trim()) {
+            Alert.alert('Error', 'El tiempo es un campo obligatorio');
+            return false;
+        }
+        if (ordenTrabajo === '' || !ordenTrabajo.trim()) {
+            Alert.alert('Error', 'La orden de trabajo es un campo obligatorio');
+            return false;
+        }
 
         return true;
     };
 
+    //Limpio los datos
     const clearData = () => {
-        setIdentificacion('');
-        setNombreTratamiento('');
-        setSelectedZona('');
-        setSelectedUsuario('');
-        setFechaInicio('');
-        setFechaFin('');
-        setTiempo('');
-        setOrdenTrabajo('');
-        setSelectedInsumo('');
-        setSelectedObservacion('');
+        setIdentificacion("");
+        setNombreTratamiento("");
+        setSelectedZona("");
+        setSelectedUsuario("");
+        setFechaInicio("");
+        setFechaFin("");
+        setTiempo("");
+        setOrdenTrabajo("");
+        setSelectedInsumo("");
+        setSelectedObservacion("");
     };
 
     return (
@@ -161,16 +226,18 @@ const AddTratamiento = () => {
                 <View style={styles.container}>
                     <Text style={styles.title}>Formulario de ingreso:</Text>
                     <View style={styles.formContainer}>
+                        <MyText textValue="Identificación:" textStyle={styles.title2} />
                         <MyInputText
                             style={styles.input}
                             placeholder="Identificación"
-                            onChangeText={setIdentificacion}
+                            onChangeText={handleIdentChange}
                             value={identificacion}
                         />
+                        <MyText textValue="Nombre del tratamiento:" textStyle={styles.title2} />
                         <MyInputText
                             style={styles.input}
                             placeholder="Nombre de tratamiento"
-                            onChangeText={setNombreTratamiento}
+                            onChangeText={handleNomTratChange}
                             value={nombreTratamiento}
                         />
                         <CustomPicker
@@ -185,28 +252,32 @@ const AddTratamiento = () => {
                             onValueChange={handleUsuarioChange}
                             items={usuarios}
                         />
+                        <MyText textValue="Fecha de inicio:" textStyle={styles.title2} />
                         <MyInputText
                             style={styles.input}
                             placeholder="Fecha de inicio"
-                            onChangeText={setFechaInicio}
+                            onChangeText={handleFechaIniChange}
                             value={fechaInicio}
                         />
+                        <MyText textValue="Fecha de fin:" textStyle={styles.title2} />
                         <MyInputText
                             style={styles.input}
                             placeholder="Fecha de fin"
-                            onChangeText={setFechaFin}
+                            onChangeText={handleFechaFinChange}
                             value={fechaFin}
                         />
+                        <MyText textValue="Horas de ejecución:" textStyle={styles.title2} />
                         <MyInputText
                             style={styles.input}
                             placeholder="Tiempo"
-                            onChangeText={setTiempo}
+                            onChangeText={handleTiempoChange}
                             value={tiempo}
                         />
+                        <MyText textValue="Orden de trabajo:" textStyle={styles.title2} />
                         <MyInputText
                             style={styles.input}
                             placeholder="Orden de trabajo"
-                            onChangeText={setOrdenTrabajo}
+                            onChangeText={handleOrdenChange}
                             value={ordenTrabajo}
                         />
                         <CustomPicker
