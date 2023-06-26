@@ -35,6 +35,15 @@ import UpdateObservacion from '../screens/Observaciones/data/UpdateObservacion';
 import ViewObservacion from '../screens/Observaciones/data/ViewObservacion';
 import ViewAllObservaciones from '../screens/Observaciones/data/ViewAllObservaciones';
 /*---------------------------------------------------------------*/
+/* ZONA DE IMPORT DE COMPONENTES DE TRATAMIENTOS*/
+import HomeTratamientos from '../screens/Tratamientos/HomeTratamientos';
+import AddTratamientos from '../screens/Tratamientos/data/AddTratamientos';
+import DeleteTratamientos from '../screens/Tratamientos/data/DeleteTratamientos'
+import UpdateTratamientos from '../screens/Tratamientos/data/UpdateTratamientos'
+import ViewTratamientos from '../screens/Tratamientos/data/ViewTratamientos'
+import ViewAllTratamientos from '../screens/Tratamientos/data/ViewAllTratamientos'
+/*---------------------------------------------------------------*/
+
 
 
 
@@ -427,6 +436,96 @@ const Navigation = () => {
                     component={ViewAllObservaciones}
                     options={{
                         title: "Todas las Observaciones",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="HomeTratamientos"
+                    component={HomeTratamientos}
+                    options={{
+                        title: "HomeTratamientos",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="AddTratamientos"
+                    component={AddTratamientos}
+                    options={{
+                        title: "Agregar Tratamiento",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="DeleteTratamientos"
+                    component={DeleteTratamientos}
+                    options={{
+                        title: "Borrar Tratamiento",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="UpdateTratamientos"
+                    component={UpdateTratamientos}
+                    options={{
+                        title: "Modificar Tratamiento",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="ViewTratamientos"
+                    component={ViewTratamientos}
+                    options={{
+                        title: "Ver Tratamiento",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                 <Stack.Screen
+                    name="ViewAllTratamientos"
+                    component={ViewAllTratamientos}
+                    options={{
+                        title: "Todos los Tratamientos",
                         headerStyle: {
                             backgroundColor: "#31994d",
                         },

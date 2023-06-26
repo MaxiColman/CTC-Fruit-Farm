@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
                 title="Tratamientos"
                 btnColor="#31994d"
                 btnIcon="street-view"
-                onPress={() => console.log('click')}
+                onPress={() => navigation.navigate('HomeTratamientos')}
               />
             </View>
           </ScrollView>

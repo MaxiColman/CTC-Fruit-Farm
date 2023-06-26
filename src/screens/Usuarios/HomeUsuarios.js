@@ -14,7 +14,7 @@ const HomeUsuarios = ({ navigation }) => {
     
       const createDb = (txn) => {
         txn.executeSql(
-          'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(60), lastName VARCHAR(20), cedula VARCHAR(20))',
+          'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(60), lastName VARCHAR(60), cedula VARCHAR(20))',
           []
         );
       }
@@ -29,8 +29,8 @@ const HomeUsuarios = ({ navigation }) => {
                 createDb(txn);
               } else {
                 console.log("Tabla ya existe");
-                dropDb(txn);
-                createDb(txn);
+                //dropDb(txn);
+                //createDb(txn);
               }
             }
           )
