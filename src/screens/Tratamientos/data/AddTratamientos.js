@@ -97,6 +97,7 @@ const AddTratamiento = () => {
                 for (let i = 0; i < rows.length; i++) {
                     observacionesList.push({ label: rows.item(i).titulo, value: rows.item(i).titulo });
                 }
+                observacionesList.unshift({ label: "No hay observaciones", value: null });
                 setObservaciones(observacionesList);
             });
         });
