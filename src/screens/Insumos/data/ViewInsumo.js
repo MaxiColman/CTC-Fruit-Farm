@@ -76,8 +76,8 @@ const ViewInsumo = () => {
                     <MyText textValue="ID del insumo:" textStyle={styles.presenterTextBold} />
                     <MyText textValue={id.id.toString()} textStyle={styles.presenterText} />
                     <MyText textValue="Nombre del insumo:" textStyle={styles.presenterTextBold} />
-                    <MyText textValue={id.insumoName} textStyle={styles.presenterText} />
-                    <MyText textValue="Cantidad de litros:" textStyle={styles.presenterTextBold} />
+                    <MyText textValue={id.titulo} textStyle={styles.presenterText} />
+                    <MyText textValue="latitud:" textStyle={styles.presenterTextBold} />
                     <MyText textValue={id.cantLitros} textStyle={styles.presenterText} />
                   </>
                 ) : (
