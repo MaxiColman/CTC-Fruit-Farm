@@ -18,7 +18,7 @@ const ViewAllObservaciones = () => {
           setObsid(results.rows._array);
         } else {
           Alert.alert(
-            "ERROR",
+            "INGRESAR",
             "No hay observaciónes!!!",
             [
               {
