@@ -28,10 +28,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
+    marginTop: 100,
     width: '80%',
     height: 50,
-    borderWidth: 1,
-    borderColor: 'black',
     justifyContent: 'center',
     textAlign: 'center',
     marginBottom: 10,

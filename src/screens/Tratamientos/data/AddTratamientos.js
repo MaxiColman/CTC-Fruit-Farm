@@ -240,14 +240,17 @@ const AddTratamiento = () => {
                             onChangeText={handleNomTratChange}
                             value={nombreTratamiento}
                         />
+                        <View>
+                            <CustomPicker
+                                label="Zona"
+                                selectedValue={selectedZona}
+                                onValueChange={handleZonaChange}
+                                items={zonas}
+                            />
+                        </View>
+                        <MyText textValue="Usuario" textStyle={styles.title2} />
                         <CustomPicker
-                            label="Zona"
-                            selectedValue={selectedZona}
-                            onValueChange={handleZonaChange}
-                            items={zonas}
-                        />
-                        <CustomPicker
-                            label="Usuario"
+                            label=""
                             selectedValue={selectedUsuario}
                             onValueChange={handleUsuarioChange}
                             items={usuarios}

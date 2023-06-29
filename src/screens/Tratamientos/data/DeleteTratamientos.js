@@ -92,7 +92,7 @@ const DeleteTratamientos = () => {
             message="¿Estás seguro que deseas eliminar esta tratamiento?"
             onConfirm={() => {
               setShowConfirmationModal(false);
-              deleteObservacion();
+              deleteTratamientos();
             }}
             onCancel={() => setShowConfirmationModal(false)}
           />
