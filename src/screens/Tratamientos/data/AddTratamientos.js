@@ -31,7 +31,7 @@ const AddTratamiento = () => {
     const [insumos, setInsumos] = useState([]);
 
     const navigation = useNavigation();
-
+      
     const handleFoto = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (permissionResult.granted === false) {

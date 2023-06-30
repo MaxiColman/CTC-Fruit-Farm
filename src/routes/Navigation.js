@@ -43,7 +43,8 @@ import UpdateTratamientos from '../screens/Tratamientos/data/UpdateTratamientos'
 import ViewTratamientos from '../screens/Tratamientos/data/ViewTratamientos'
 import ViewAllTratamientos from '../screens/Tratamientos/data/ViewAllTratamientos'
 /*---------------------------------------------------------------*/
-
+/*ZONA DE IMPORT DEL MAPA */
+import MapaTratamientos from '../screens/MapaTratamientos/MapaTratamientos'
 
 
 
@@ -526,6 +527,21 @@ const Navigation = () => {
                     component={ViewAllTratamientos}
                     options={{
                         title: "Todos los Tratamientos",
+                        headerStyle: {
+                            backgroundColor: "#31994d",
+                        },
+                        headerTitleAlign: "center",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                />
+                    <Stack.Screen
+                    name="MapaTratamientos"
+                    component={MapaTratamientos}
+                    options={{
+                        title: "Mapa de los Tratamientos",
                         headerStyle: {
                             backgroundColor: "#31994d",
                         },

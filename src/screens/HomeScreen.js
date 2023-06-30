@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { View, SafeAreaView, ScrollView, Text, StyleSheet } from "react-native";
 import Button from "../components/Button";
 import { ImageBackground } from 'react-native';
@@ -33,17 +33,23 @@ const HomeScreen = ({ navigation }) => {
                 btnIcon="apple"
                 onPress={() => navigation.navigate('HomeInsumos')}
               />
-               <Button
+              <Button
                 title="Observaciones"
                 btnColor="#31994d"
                 btnIcon="compass"
                 onPress={() => navigation.navigate('HomeObservaciones')}
               />
-               <Button
+              <Button
                 title="Tratamientos"
                 btnColor="#31994d"
                 btnIcon="street-view"
                 onPress={() => navigation.navigate('HomeTratamientos')}
+              />
+              <Button
+                title="Mapa tratamientos activos"
+                btnColor="#31994d"
+                btnIcon="map"
+                onPress={() => navigation.navigate('MapaTratamientos')}
               />
             </View>
           </ScrollView>
@@ -54,7 +60,7 @@ const HomeScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
   },
   safeAreaView: {
