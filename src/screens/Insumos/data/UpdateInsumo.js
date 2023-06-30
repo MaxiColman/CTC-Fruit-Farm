@@ -30,6 +30,7 @@ const UpdateInsumo = () => {
   const handleCantidadLitros = (cantLitros) => {
     setCantLitros(cantLitros);
   }
+  
   const openConfirmationModal = () => {
     if (!InsumoId || !InsumoId.trim()) {
       Alert.alert("Error", "El campo ID Insumo es obligatorio");

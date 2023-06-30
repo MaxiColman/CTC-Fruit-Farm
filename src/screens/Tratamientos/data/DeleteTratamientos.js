@@ -24,7 +24,7 @@ const DeleteTratamientos = () => {
         (_, results) => {
           console.log("Results", results.rowsAffected);
           if (results.rowsAffected > 0) {
-            Alert.alert("Exito", "Este tratamiento fue borrada correctamente", [
+            Alert.alert("Exito", "Este tratamiento fue borrado correctamente", [
               {
                 text: "Ok",
                 onPress: () => navigation.navigate("HomeTratamientos"),

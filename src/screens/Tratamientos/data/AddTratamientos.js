@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Alert, TouchableOpacity, Image } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import MyInputText from '../../../components/MyInputText';
 import MyText from '../../../components/MyText';
 import SingleButton from '../../../components/SingleButton';
@@ -17,7 +18,7 @@ const AddTratamiento = () => {
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
     const [tiempo, setTiempo] = useState('');
-    const [ordenTrabajo, setOrdenTrabajo] = useState('');
+    const [ordenTrabajo, setOrdenTrabajo] = useState(null);
     const [selectedZona, setSelectedZona] = useState('');
     const [selectedUsuario, setSelectedUsuario] = useState('');
     const [selectedObservacion, setSelectedObservacion] = useState('');
@@ -30,6 +31,19 @@ const AddTratamiento = () => {
     const [insumos, setInsumos] = useState([]);
 
     const navigation = useNavigation();
+
+    const handleFoto = async () => {
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (permissionResult.granted === false) {
+            Alert.alert('Permiso requerido', 'Se requiere acceso a la galería de imágenes para seleccionar una foto.');
+            return;
+        }
+
+        const imagePickerResult = await ImagePicker.launchImageLibraryAsync();
+        if (!imagePickerResult.canceled) {
+            setOrdenTrabajo(imagePickerResult.assets[0].uri);
+        }
+    };
 
     //Agrego un tratamiento
     const addTratamiento = () => {
@@ -152,10 +166,6 @@ const AddTratamiento = () => {
         setTiempo(tiempo);
     };
 
-    const handleOrdenChange = (ordenTrabajo) => {
-        setOrdenTrabajo(ordenTrabajo);
-    };
-
     const handleObservacionChange = (value) => {
         setSelectedObservacion(value);
     };
@@ -198,7 +208,7 @@ const AddTratamiento = () => {
             Alert.alert('Error', 'El tiempo es un campo obligatorio');
             return false;
         }
-        if (ordenTrabajo === '' || !ordenTrabajo.trim()) {
+        if (ordenTrabajo === null) {
             Alert.alert('Error', 'La orden de trabajo es un campo obligatorio');
             return false;
         }
@@ -215,7 +225,7 @@ const AddTratamiento = () => {
         setFechaInicio("");
         setFechaFin("");
         setTiempo("");
-        setOrdenTrabajo("");
+        setOrdenTrabajo(null);
         setSelectedInsumo("");
         setSelectedObservacion("");
     };
@@ -242,15 +252,14 @@ const AddTratamiento = () => {
                         />
                         <View>
                             <CustomPicker
-                                label="Zona"
+                                label="Zonas"
                                 selectedValue={selectedZona}
                                 onValueChange={handleZonaChange}
                                 items={zonas}
                             />
                         </View>
-                        <MyText textValue="Usuario" textStyle={styles.title2} />
                         <CustomPicker
-                            label=""
+                            label="Usuarios"
                             selectedValue={selectedUsuario}
                             onValueChange={handleUsuarioChange}
                             items={usuarios}
@@ -277,12 +286,13 @@ const AddTratamiento = () => {
                             value={tiempo}
                         />
                         <MyText textValue="Orden de trabajo:" textStyle={styles.title2} />
-                        <MyInputText
-                            style={styles.input}
-                            placeholder="Orden de trabajo"
-                            onChangeText={handleOrdenChange}
-                            value={ordenTrabajo}
-                        />
+                        <TouchableOpacity style={styles.imagePicker} onPress={handleFoto}>
+                            {ordenTrabajo ? (
+                                <Image source={{ uri: ordenTrabajo }} style={styles.selectedImage} />
+                            ) : (
+                                <Text style={styles.imagePickerText}>Seleccionar foto</Text>
+                            )}
+                        </TouchableOpacity>
                         <CustomPicker
                             label="Insumos"
                             selectedValue={selectedInsumo}
@@ -358,6 +368,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 35,
         marginTop: 20,
     },
+    imagePicker: {
+        marginTop: 20,
+        marginBottom: 20,
+        alignSelf: 'center',
+        marginVertical: 10,
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 5,
+        backgroundColor: 'green',
+      },
+      imagePickerText: {
+        marginTop: 2,
+        marginBottom: 2,
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold',
+      },
+      selectedImage: {
+        width: 150,
+        height: 150,
+        alignSelf: 'center',
+      },
 });
 
 export default AddTratamiento;

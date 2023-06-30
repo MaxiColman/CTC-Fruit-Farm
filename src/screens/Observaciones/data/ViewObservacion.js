@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView, } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView, Image } from "react-native";
 import MyText from "../../../components/MyText";
 import MyInputText from "../../../components/MyInputText";
 import SingleButton from "../../../components/SingleButton";
 import { useNavigation } from "@react-navigation/native";
 import DatabaseConnection from "../../../database/db-connection";
 const db = DatabaseConnection.getConnection();
-
-
-
 
 const ViewObservacion = () => {
 
