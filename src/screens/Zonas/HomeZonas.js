@@ -15,7 +15,7 @@ const HomeZonas = ({ navigation }) => {
     
       const createDb = (txn) => {
         txn.executeSql(
-          'CREATE TABLE IF NOT EXISTS zonas (id INTEGER PRIMARY KEY AUTOINCREMENT, lugar VARCHAR(60), depto VARCHAR(20), cantTrab VARCHAR(50), latitud VARCHAR(60), longitud VARCHAR(60))',
+          'CREATE TABLE IF NOT EXISTS zonas (id INTEGER PRIMARY KEY AUTOINCREMENT, lugar VARCHAR(60), depto VARCHAR(20), cantTrab VARCHAR(50), latitud NUMERIC, longitud NUMERIC)',
           []
         );
       }

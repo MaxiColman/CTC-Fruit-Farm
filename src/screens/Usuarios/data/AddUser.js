@@ -85,7 +85,6 @@ const AddUser = () => {
       <ScrollView>
         <MyText textValue="Formulario ingreso de Usuarios:" textStyle={styles.title} />
         <View style={styles.formContainer}>
-          <Icon name="user" size={20} color="black" style={styles.icon} />
           <Text style={styles.title2}>Nombre:</Text>
           <MyInputText
             style={styles.input}
@@ -93,7 +92,6 @@ const AddUser = () => {
             onChangeText={handleUserName}
             value={userName}
           />
-          <Icon name="users" size={20} color="black" style={styles.icon1} />
           <Text style={styles.title2}>Apellido:</Text>
           <MyInputText
             style={styles.input}
@@ -101,7 +99,6 @@ const AddUser = () => {
             onChangeText={handleLastName}
             value={lastName}
           />
-          <Icon name="v-card" size={20} color="black" style={styles.icon2} />
           <Text style={styles.title2}>Cedula:</Text>
           <MyInputText
             style={styles.input}
@@ -169,7 +166,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-    marginLeft: 70,
+    textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.2)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,

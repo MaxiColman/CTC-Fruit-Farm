@@ -62,7 +62,7 @@ const MapaTratamientos = () => {
   const fetchZonas = () => {
     db.transaction(txn => {
       txn.executeSql(
-        'SELECT lugar, latitud, longitud FROM zonas',
+        'SELECT z.lugar, z.latitud, z.longitud FROM zonas z INNER JOIN tratamientos t ON z.lugar = t.zonas WHERE t.fechaInicio <= t.fechaFin',
         [],
         (_, { rows }) => {
           const zonasList = [];
@@ -79,6 +79,7 @@ const MapaTratamientos = () => {
       );
     });
   };
+  
 
 
   return (
@@ -87,10 +88,10 @@ const MapaTratamientos = () => {
         style={styles.map}
         ref={mapRef}
         initialRegion={{
-          latitude: -32.5228,
+         latitude: -32.5228,
           longitude: -55.7658,
-          latitudeDelta: 4,
-          longitudeDelta: 4,
+          latitudeDelta: 8,
+          longitudeDelta: 8,
         }}
       >
         {zonas.map((zona, index) => (

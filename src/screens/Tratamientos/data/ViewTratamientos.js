@@ -79,6 +79,8 @@ const ViewTratamientos = () => {
                   <MyText textValue={id.identificacion} textStyle={styles.presenterText} />
                   <MyText textValue="Fecha de inicio:" textStyle={styles.presenterTextBold} />
                   <MyText textValue={id.fechaInicio} textStyle={styles.presenterText} />
+                  <MyText textValue="Zonas:" textStyle={styles.presenterTextBold} />
+                  <MyText textValue={id.zonas} textStyle={styles.presenterText} />
                   <MyText textValue="Observaciones:" textStyle={styles.presenterTextBold} />
                   <MyText textValue={id.observaciones} textStyle={styles.presenterText} />
                 </>

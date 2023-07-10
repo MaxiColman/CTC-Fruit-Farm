@@ -60,7 +60,6 @@ const ViewUser = () => {
             <View style={styles.formContainer}>
               <ScrollView>
                 <KeyboardAvoidingView>
-                <Icon name="user" size={20} color="black" style={styles.icon} />
                 <Text style={styles.title2}>Nombre del Usuario:</Text>
                   <MyInputText
                     placeholder="Ingrese un nombre"
@@ -69,7 +68,6 @@ const ViewUser = () => {
                     value={userName}
                   />
                   <SingleButton title="Buscar" btnColor="green" onPress={getUser} />
-                  <Icon name="list" size={20} color="black" style={styles.icon1} />
                   <Text style={styles.title2}>Informacion del Usuario:</Text>
                   <View style={styles.presenterView}>
                     {user ? (
@@ -130,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-    marginLeft: 72,
+    textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.2)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,

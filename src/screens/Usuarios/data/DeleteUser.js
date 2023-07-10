@@ -70,7 +70,6 @@ const DeleteUser = () => {
       <ScrollView>
         <MyText textValue="Formulario para eliminar usuarios:" textStyle={styles.title} />
         <View style={styles.formContainer}>
-          <Icon name="remove-user" size={20} color="black" style={styles.icon} />
           <Text style={styles.title2}>Nombre del Usuario:</Text>
           <MyInputText
             style={styles.input}
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-    marginLeft: 72,
+    textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.2)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,

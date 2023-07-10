@@ -284,7 +284,7 @@ const UpdateTratamientos = () => {
             <MyText textValue="Fecha Fin:" textStyle={styles.title2} />
             <MyInputText
               placeholder="Ingrese la fecha de fin"
-              value={selectedUsuario}
+              value={fechaFin}
               onChangeText={handlesetFechaFin}
             />
             <MyText textValue="Horas de ejecución:" textStyle={styles.title2} />

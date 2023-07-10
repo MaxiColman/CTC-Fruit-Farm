@@ -31,7 +31,7 @@ const AddTratamiento = () => {
     const [insumos, setInsumos] = useState([]);
 
     const navigation = useNavigation();
-      
+
     const handleFoto = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (permissionResult.granted === false) {
@@ -377,20 +377,20 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         padding: 5,
         backgroundColor: 'green',
-      },
-      imagePickerText: {
+    },
+    imagePickerText: {
         marginTop: 2,
         marginBottom: 2,
         textAlign: 'center',
         color: 'white',
         fontSize: 20,
         fontWeight: 'bold',
-      },
-      selectedImage: {
+    },
+    selectedImage: {
         width: 150,
         height: 150,
         alignSelf: 'center',
-      },
+    },
 });
 
 export default AddTratamiento;

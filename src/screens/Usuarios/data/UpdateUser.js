@@ -133,7 +133,6 @@ const UpdateUser = () => {
         <ScrollView>
           <MyText textValue="Buscar usuario:" textStyle={styles.title} />
           <View style={styles.formContainer}>
-            <Icon name="user" size={20} color="black" style={styles.icon} />
             <Text style={styles.title2}>Nombre del Usuario:</Text>
             <MyInputText
               placeholder="Ingrese el nombre"
@@ -149,21 +148,18 @@ const UpdateUser = () => {
           </View>
           <MyText textValue="Ingrese los nuevos datos:" textStyle={styles.title} />
           <View style={styles.formContainer}>
-            <Icon name="user" size={20} color="black" style={styles.icon1} />
             <Text style={styles.title2}>Nombre del Usuario:</Text>
             <MyInputText
               placeholder="Ingrese el nombre"
               value={userName}
               onChangeText={handleUserName}
             />
-            <Icon name="users" size={20} color="black" style={styles.icon2} />
             <Text style={styles.title2}>Apellido del Usuario:</Text>
             <MyInputText
               placeholder="Ingrese el apellido"
               value={lastName}
               onChangeText={handleUserLastName}
             />
-            <Icon name="v-card" size={20} color="black" style={styles.icon3} />
             <Text style={styles.title2}>Cedula del Usuario:</Text>
             <MyInputText
               placeholder="Ingrese la cedula"
@@ -246,7 +242,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-    marginLeft: 72,
+    textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.2)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,
